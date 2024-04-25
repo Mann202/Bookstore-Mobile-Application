@@ -1,4 +1,4 @@
-# bookstore_mobile_application
+# Bookstore-Mobile-Application
 
 A new Flutter project.
 
