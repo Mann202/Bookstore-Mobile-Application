@@ -1,3 +1,4 @@
+import "package:flutter/widgets.dart";
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 
@@ -12,6 +13,7 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
+        builder: (context, state) => Container(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
