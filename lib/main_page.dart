@@ -88,9 +88,6 @@ class MainPage extends StatelessWidget {
                   )
                 ],
               ))),
-      bottomNavigationBar: BottomNavigationBarWidget(
-        currentIndex: 1,
-      ),
     );
   }
 }
