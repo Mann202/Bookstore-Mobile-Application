@@ -2,6 +2,7 @@ import "package:flutter/widgets.dart";
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
+import "package:shelfify/features/settings/presentation/accounts_screen.dart";
 import "package:shelfify/features/settings/presentation/settings_screen.dart";
 import "package:shelfify/login_page.dart";
 
@@ -14,7 +15,7 @@ GoRouter goRouter(ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const SettingsScreen(),
+        builder: (context, state) => const AccountsSreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
