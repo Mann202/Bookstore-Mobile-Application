@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'models.freezed.dart';
 
+@freezed
 class Customer with _$Customer {
   const factory Customer({
     required int customerId,
@@ -51,7 +52,7 @@ class Invoice with _$Invoice {
 class InvoiceInfo with _$InvoiceInfo {
   const factory InvoiceInfo({
     required int invoiceId,
-    required int bookId,
+    required int id,
     required int quantity,
     required double unitPrice,
     required double totalPrice,
@@ -61,8 +62,8 @@ class InvoiceInfo with _$InvoiceInfo {
 @freezed
 class Book with _$Book {
   const factory Book({
-    required int bookId,
-    required int bookCategoryId,
+    required int id,
+    required int categoryId,
     required String publisher,
     required int publicationYear,
     required int quantityInStock,
@@ -72,8 +73,8 @@ class Book with _$Book {
 
   factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
-      bookId: map['MaSach'] as int,
-      bookCategoryId: map['bookCategoryId'] as int,
+      id: map['MaSach'] as int,
+      categoryId: map['categoryId'] as int,
       publisher: map['publisher'] as String,
       publicationYear: map['publicationYear'] as int,
       quantityInStock: map['quantityInStock'] as int,
@@ -88,7 +89,7 @@ class InventoryReport with _$InventoryReport {
   const factory InventoryReport({
     required int month,
     required int year,
-    required int bookId,
+    required int id,
     required int startingQuantity,
     required int quantityChange,
     required int endingQuantity,
@@ -108,7 +109,7 @@ class BookPurchaseReceipt with _$BookPurchaseReceipt {
 class BookPurchaseReceiptInfo with _$BookPurchaseReceiptInfo {
   const factory BookPurchaseReceiptInfo({
     required int receiptId,
-    required int bookId,
+    required int id,
     required int quantity,
     required double purchasePrice,
     required double totalPrice,
@@ -118,7 +119,7 @@ class BookPurchaseReceiptInfo with _$BookPurchaseReceiptInfo {
 @freezed
 class BookCategory with _$BookCategory {
   const factory BookCategory({
-    required int bookCategoryId,
+    required int categoryId,
     required String categoryName,
   }) = _BookCategory;
 }
@@ -134,7 +135,7 @@ class Genre with _$Genre {
 @freezed
 class AuthorInfo with _$AuthorInfo {
   const factory AuthorInfo({
-    required int bookId,
+    required int id,
     required int authorId,
   }) = _AuthorInfo;
 }
