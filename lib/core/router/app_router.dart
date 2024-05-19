@@ -2,17 +2,18 @@ import "package:flutter/widgets.dart";
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
+import "package:shelfify/login_page.dart";
 
 import "not_found_screen.dart";
 
 @Riverpod(keepAlive: true)
-GoRouter goRouter(GoRouterRef ref) {
+GoRouter goRouter(ref) {
   return GoRouter(
     initialLocation: "/",
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const BookListScreen(),
+        builder: (context, state) => LoginScreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
@@ -20,17 +21,6 @@ GoRouter goRouter(GoRouterRef ref) {
 }
 
 
-String _$goRouterHash() => r'e5cabd4f20eef185e81873123268c01a10ec500e';
 
-/// See also [goRouter].
-@ProviderFor(goRouter)
-final goRouterProvider = Provider<GoRouter>.internal(
-  goRouter,
-  name: r'goRouterProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$goRouterHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final goRouterProvider = Provider<GoRouter>((ref) {return goRouter(ref);});
 
-typedef GoRouterRef = ProviderRef<GoRouter>;

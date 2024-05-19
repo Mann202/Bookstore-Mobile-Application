@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+  print("build");
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -12,7 +12,6 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/logo.png'), 
               const SizedBox(height: 20),
               const Text(
                 'SHELFIFY',
