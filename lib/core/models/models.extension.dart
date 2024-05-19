@@ -24,7 +24,7 @@ extension BookExtension on Book {
   String getCategory() {
     if (CATERGORY_MAPPER[getTitle()] == null) return "Unknown";
 
-    return CATEGORIES[CATERGORY_MAPPER[getTitle()]!];
+    return CATEGORIES[CATERGORY_MAPPER[getTitle()]! - 1];
   }
 }
 
