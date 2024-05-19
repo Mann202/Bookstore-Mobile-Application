@@ -1,22 +1,11 @@
 import 'package:shelfify/core/models/models.dart';
+import 'package:shelfify/features/book/data/datasource/books_database.dart';
 
 extension BookExtension on Book {
-  Book fromMap(Map<String, dynamic> map) {
-    return Book(
-      bookId: map['MaSach'] as int,
-      bookCategoryId: map['MaDauSach'] as int,
-      publisher: map['NhaXuatBan'] as String,
-      publicationYear: map['NamXuatBan'] as int,
-      quantityInStock: map['SoLuongTon'] as int,
-      sellingPrice: map['DonGiaBan'] as double,
-      purchasePrice: map['DonGiaNhap'] as double,
-    );
-  }
-
   Map<String, dynamic> toMap() {
     return {
-      'MaSach': bookId,
-      'MaDauSach': bookCategoryId,
+      'MaSach': id,
+      'MaDauSach': categoryId,
       'NhaXuatBan': publisher,
       'NamXuatBan': publicationYear,
       'SoLuongTon': quantityInStock,
@@ -26,32 +15,46 @@ extension BookExtension on Book {
   }
 }
 
+extension ToMapExtension on Map<String, dynamic> {
+  Book toModel() {
+    return Book(
+      id: ['MaSach'] as int,
+      categoryId: ['MaDauSach'] as int,
+      publisher: ['NhaXuatBan'] as String,
+      publicationYear: ['NamXuatBan'] as int,
+      quantityInStock: ['SoLuongTon'] as int,
+      sellingPrice: ['DonGiaBan'] as double,
+      purchasePrice: ['DonGiaNhap'] as double,
+    );
+  }
+}
+
 extension InventoryReportExtension on InventoryReport {
-  InventoryReport fromMap(Map<String, dynamic> map) {
+  static InventoryReport toModel(Map<String, dynamic> map) {
     return InventoryReport(
       month: map['Thang'] as int,
       year: map['Nam'] as int,
-      bookId: map['MaSach'] as int,
+      id: map['MaSach'] as int,
       startingQuantity: map['SoLuongDauKy'] as int,
       quantityChange: map['SoLuongPhatSinh'] as int,
       endingQuantity: map['SoLuongCuoiKy'] as int,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  static Map<String, dynamic> toMap(final InventoryReport model) {
     return {
-      'Thang': month,
-      'Nam': year,
-      'MaSach': bookId,
-      'SoLuongDauKy': startingQuantity,
-      'SoLuongPhatSinh': quantityChange,
-      'SoLuongCuoiKy': endingQuantity,
+      'Thang': model.month,
+      'Nam': model.year,
+      'MaSach': model.id,
+      'SoLuongDauKy': model.startingQuantity,
+      'SoLuongPhatSinh': model.quantityChange,
+      'SoLuongCuoiKy': model.endingQuantity,
     };
   }
 }
 
 extension BookPurchaseReceiptExtension on BookPurchaseReceipt {
-  BookPurchaseReceipt fromMap(Map<String, dynamic> map) {
+  BookPurchaseReceipt toModel(Map<String, dynamic> map) {
     return BookPurchaseReceipt(
       receiptId: map['MaPhieuNhap'] as int,
       purchaseDate: DateTime.parse(map['NgayNhap']),
@@ -69,10 +72,10 @@ extension BookPurchaseReceiptExtension on BookPurchaseReceipt {
 }
 
 extension BookPurchaseReceiptInfoExtension on BookPurchaseReceiptInfo {
-  BookPurchaseReceiptInfo fromMap(Map<String, dynamic> map) {
+  BookPurchaseReceiptInfo toModel(Map<String, dynamic> map) {
     return BookPurchaseReceiptInfo(
       receiptId: map['MaPhieuNhap'] as int,
-      bookId: map['MaSach'] as int,
+      id: map['MaSach'] as int,
       quantity: map['SoLuong'] as int,
       purchasePrice: map['DonGiaNhap'] as double,
       totalPrice: map['ThanhTien'] as double,
@@ -82,7 +85,7 @@ extension BookPurchaseReceiptInfoExtension on BookPurchaseReceiptInfo {
   Map<String, dynamic> toMap() {
     return {
       'MaPhieuNhap': receiptId,
-      'MaSach': bookId,
+      'MaSach': id,
       'SoLuong': quantity,
       'DonGiaNhap': purchasePrice,
       'ThanhTien': totalPrice,
@@ -91,7 +94,7 @@ extension BookPurchaseReceiptInfoExtension on BookPurchaseReceiptInfo {
 }
 
 extension CustomerExtension on Customer {
-  Customer fromMap(Map<String, dynamic> map) {
+  Customer toModel(Map<String, dynamic> map) {
     return Customer(
       customerId: map['MaKhachHang'] as int,
       customerName: map['TenKhachHang'] as String,
@@ -113,7 +116,7 @@ extension CustomerExtension on Customer {
 }
 
 extension PaymentReceiptExtension on PaymentReceipt {
-  PaymentReceipt fromMap(Map<String, dynamic> map) {
+  PaymentReceipt toModel(Map<String, dynamic> map) {
     return PaymentReceipt(
       receiptId: map['MaPhieuThu'] as int,
       customerId: map['MaKhachHang'] as int,
@@ -133,7 +136,7 @@ extension PaymentReceiptExtension on PaymentReceipt {
 }
 
 extension DebtReportExtension on DebtReport {
-  DebtReport fromMap(Map<String, dynamic> map) {
+  DebtReport toModel(Map<String, dynamic> map) {
     return DebtReport(
       customerId: map['MaKhachHang'] as String,
       month: map['Thang'] as int,
@@ -157,7 +160,7 @@ extension DebtReportExtension on DebtReport {
 }
 
 extension InvoiceExtension on Invoice {
-  Invoice fromMap(Map<String, dynamic> map) {
+  Invoice toModel(Map<String, dynamic> map) {
     return Invoice(
       invoiceId: map['MaHoaDon'] as int,
       customerId: map['MaKhachHang'] as int,
@@ -181,10 +184,10 @@ extension InvoiceExtension on Invoice {
 }
 
 extension InvoiceInfoExtension on InvoiceInfo {
-  InvoiceInfo fromMap(Map<String, dynamic> map) {
+  InvoiceInfo toModel(Map<String, dynamic> map) {
     return InvoiceInfo(
       invoiceId: map['MaHoaDon'] as int,
-      bookId: map['MaSach'] as int,
+      id: map['MaSach'] as int,
       quantity: map['SoLuong'] as int,
       unitPrice: map['DonGiaBan'] as double,
       totalPrice: map['ThanhTien'] as double,
@@ -194,7 +197,7 @@ extension InvoiceInfoExtension on InvoiceInfo {
   Map<String, dynamic> toMap() {
     return {
       'MaHoaDon': invoiceId,
-      'MaSach': bookId,
+      'MaSach': id,
       'SoLuong': quantity,
       'DonGiaBan': unitPrice,
       'ThanhTien': totalPrice,
@@ -203,16 +206,16 @@ extension InvoiceInfoExtension on InvoiceInfo {
 }
 
 extension BookCategoryExtension on BookCategory {
-  BookCategory fromMap(Map<String, dynamic> map) {
+  BookCategory toModel(Map<String, dynamic> map) {
     return BookCategory(
-      bookCategoryId: map['MaDauSach'] as int,
+      categoryId: map['MaDauSach'] as int,
       categoryName: map['TenDauSach'] as String,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'MaDauSach': bookCategoryId,
+      'MaDauSach': categoryId,
       'TenDauSach': categoryName,
     };
   }
