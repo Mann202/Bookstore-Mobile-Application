@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
 
-  int _currentIndex = 0; // Khởi tạo chỉ số mục đang chọn
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>{
+
+  int _currentIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-    // Thực hiện các hành động khác khi chuyển đổi tab (ví dụ: điều hướng đến trang mới)
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBarWidget(
-        currentIndex: _currentIndex,
-        onTap: _onItemTapped,),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -33,8 +34,10 @@ class MainPage extends StatelessWidget {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search, ),
                       hintText: "Tra cứu sách",
+                      hintStyle: const TextStyle(fontFamily: AppTextStyles.fontFamily, fontSize: 20.0, color: Colors.black),
+                      prefixIconColor: const Color(0xFF4758A8),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                         borderSide: BorderSide.none,

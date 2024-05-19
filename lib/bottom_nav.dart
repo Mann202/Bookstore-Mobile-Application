@@ -19,7 +19,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -31,12 +31,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.people),
-          label: 'Tài khoản'
+          label: 'Tài khoản',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          label: "Cài đặt"
-        )
+          label: "Cài đặt",
+        ),
       ],
       currentIndex: widget.currentIndex,
       onTap: widget.onTap,

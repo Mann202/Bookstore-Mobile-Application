@@ -1,6 +1,8 @@
 import "package:flutter/widgets.dart";
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
+import "package:shelfify/features/book/presentation/view/add_new_book.screen.dart";
+import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/login_page.dart";
 import "package:shelfify/main_page.dart";
@@ -14,8 +16,10 @@ GoRouter goRouter(ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => MainPage(),
-      )
+        builder: (context, state) => AddNewBookScreen(),
+      ),
+
+      
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
