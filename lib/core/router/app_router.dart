@@ -16,7 +16,7 @@ GoRouter goRouter(ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => AddNewBookScreen(),
+        builder: (context, state) => BookListScreen(),
       ),
 
       
