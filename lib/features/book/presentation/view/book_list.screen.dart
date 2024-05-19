@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
+import 'package:shelfify/core/models/models.dart';
 
 class BookListScreen extends StatefulWidget {
   @override
@@ -8,10 +10,7 @@ class BookListScreen extends StatefulWidget {
 
 class _BookSearchScreenState extends State<BookListScreen> {
   
-  final List<Map<String, String>> books = [
-    {'TenDauSach': 'Sách A', 'TenTacGia': 'Tác giả A', 'TheLoai': 'Tiểu thuyết', 'SoLuongTon': '10'},
-    {'TenDauSach': 'Sách B', 'TenTacGia': 'Tác giả B', 'TheLoai': 'Khoa học', 'SoLuongTon': '5'}
-  ];
+  final List<Book> books;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _BookSearchScreenState extends State<BookListScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF4758A8), size: 35,),
           onPressed: () {
-            Navigator.pop(context); 
+            context.pop();
           },
         ),
       ),
