@@ -1,130 +1,4 @@
-CREATE TABLE "THELOAI" (
-	"MaTheLoai"	INTEGER,
-	"TenTheLoai"	TEXT NOT NULL,
-	PRIMARY KEY("MaTheLoai")
-);
-
-CREATE TABLE "THAMSO" (
-	"TenThamSo"	TEXT,
-	"GiaTri"	INTEGER NOT NULL,
-	PRIMARY KEY("TenThamSo")
-);
-
-CREATE TABLE "TACGIA" (
-	"MaTacGia"	INTEGER,
-	"TenTacGia"	TEXT NOT NULL,
-	PRIMARY KEY("MaTacGia")
-);
-
-CREATE TABLE "DAUSACH" (
-	"MaDauSach"	INTEGER,
-	"TenDauSach"	TEXT NOT NULL,
-	"MaTheLoai"	INTEGER NOT NULL,
-	PRIMARY KEY("MaDauSach" AUTOINCREMENT),
-	FOREIGN KEY("MaTheLoai") REFERENCES "THELOAI"("MaTheLoai")
-);
-
-CREATE TABLE "CT_TACGIA" (
-	"MaTacGia"	INTEGER,
-	"MaDauSach"	INTEGER,
-	PRIMARY KEY("MaTacGia","MaDauSach"),
-	FOREIGN KEY("MaDauSach") REFERENCES "DAUSACH"("MaDauSach"),
-	FOREIGN KEY("MaTacGia") REFERENCES "TACGIA"("MaTacGia")
-);
-
-CREATE TABLE "SACH" (
-	"MaSach"	INTEGER,
-	"MaDauSach"	INTEGER NOT NULL,
-	"NhaXuatBan"	TEXT NOT NULL,
-	"NamXuatBan"	INTEGER NOT NULL,
-	"SoLuongTon"	INTEGER NOT NULL,
-	"DonGiaNhap"	REAL NOT NULL,
-	"DonGiaBan"	REAL NOT NULL,
-	FOREIGN KEY("MaDauSach") REFERENCES "DAUSACH"("MaDauSach"),
-	PRIMARY KEY("MaSach" AUTOINCREMENT)
-);
-
-CREATE TABLE "KHACHHANG" (
-	"MaKhachHang"	INTEGER,
-	"TenKhachHang"	TEXT NOT NULL,
-	"DiaChi"	TEXT NOT NULL,
-	"SoDienThoai"	TEXT NOT NULL,
-	"Email"	TEXT NOT NULL,
-	"SoTienNo"	REAL NOT NULL DEFAULT 0,
-	PRIMARY KEY("MaKhachHang")
-);
-
-CREATE TABLE "HOADON" (
-	"MaHoaDon"	INTEGER,
-	"MaKhachHang"	INTEGER NOT NULL,
-	"NgayLap"	NUMERIC NOT NULL,
-	"TongTien"	REAL NOT NULL,
-	"ThanhToan"	REAL NOT NULL,
-	"ConLai"	REAL NOT NULL,
-	PRIMARY KEY("MaHoaDon" AUTOINCREMENT),
-	FOREIGN KEY("MaKhachHang") REFERENCES "KHACHHANG"("MaKhachHang")
-);
-
-CREATE TABLE "PHIEUNHAPSACH" (
-	"MaPhieuNhapSach"	INTEGER,
-	"NgayLap"	NUMERIC,
-	"TongTien"	REAL,
-	PRIMARY KEY("MaPhieuNhapSach" AUTOINCREMENT)
-);
-
-CREATE TABLE "PHIEUTHUTIEN" (
-	"MaPhieuThuTien"	INTEGER,
-	"MaKhachHang"	INTEGER NOT NULL,
-	"NgayThuTien"	NUMERIC NOT NULL,
-	"SoTienThu"	REAL NOT NULL,
-	PRIMARY KEY("MaPhieuThuTien")
-);
-
-CREATE TABLE "CT_PHIEUNHAPSACH" (
-	"MaPhieuNhapSach"	INTEGER,
-	"MaSach"	INTEGER,
-	"SoLuong"	INTEGER NOT NULL,
-	"DonGiaNhap"	REAL,
-	"ThanhTien"	REAL,
-	FOREIGN KEY("MaPhieuNhapSach") REFERENCES "PHIEUNHAPSACH"("MaPhieuNhapSach"),
-	FOREIGN KEY("MaSach") REFERENCES "SACH"("MaSach"),
-	PRIMARY KEY("MaPhieuNhapSach","MaSach")
-);
-
-CREATE TABLE "CT_HOADON" (
-	"MaHoaDon"	INTEGER,
-	"MaSach"	INTEGER,
-	"SoLuong"	INTEGER NOT NULL,
-	"DonGiaBan"	REAL,
-	"ThanhTien"	REAL,
-	FOREIGN KEY("MaHoaDon") REFERENCES "HOADON"("MaHoaDon"),
-	FOREIGN KEY("MaSach") REFERENCES "SACH"("MaSach"),
-	PRIMARY KEY("MaHoaDon","MaSach")
-);
-
-CREATE TABLE "BAOCAOTON" (
-    "Thang" INTEGER,
-    "Nam" INTEGER,
-    "MaSach" INTEGER,
-    "TonDau" INTEGER,
-    "PhatSinh" INTEGER,
-    "TonCuoi" INTEGER,
-    FOREIGN KEY("MaSach") REFERENCES "SACH"("MaSach"),
-    PRIMARY KEY("Thang","Nam","MaSach")
-);
-
-CREATE TABLE "BAOCAOCONGNO" (
-	"Thang"	INTEGER,
-	"Nam"	NUMERIC,
-	"MaKhachHang"	INTEGER,
-	"NoDau"	REAL NOT NULL,
-	"PhatSinh"	REAL NOT NULL,
-	"NoCuoi"	REAL NOT NULL,
-	FOREIGN KEY("MaKhachHang") REFERENCES "KHACHHANG"("MaKhachHang"),
-	PRIMARY KEY("Thang","Nam","MaKhachHang")
-);
-
-INSERT INTO "THAMSO" ("TenThamSo", "GiaTri")
+﻿INSERT INTO "THAMSO" ("TenThamSo", "GiaTri")
 VALUES
     ('SoLuongNhapToiThieu', 150),
     ('SoLuongTonToiDa', 300),
@@ -273,7 +147,7 @@ VALUES
     ('Đinh Thị M', '123 Đường Xô Viết Nghệ Tĩnh, Quận Bình Thạnh, TP.HCM', '0912345600', 'dinhthim@example.com', 2900000.0),
     ('Vũ Văn N', '456 Đường Hoàng Sa, Quận 3, TP.HCM', '0923456701', 'vuvann@example.com', 3400000.0),
     ('Trịnh Thị O', '789 Đường Trường Sa, Quận Bình Thạnh, TP.HCM', '0934567802', 'trinhthio@example.com', 2100000.0),
-    ('Lưu Văn P', '321 Đường Nguyễn Thái Sơn, Quận Gò Vấp, TP.HCM', '0945678903', 'luuvanp@example.com', 1600000.0);
+    ('Lưu Văn P', '321 Đường Nguyễn Thái Sơn, Quận Gò Vấp, TP.HCM', '0945678903', 'luuvanp@example.com', 1600000.0),
 
 INSERT INTO "BAOCAOCONGNO" ("Thang", "Nam", "MaKhachHang", "NoDau", "PhatSinh", "NoCuoi")
 VALUES
@@ -308,8 +182,47 @@ VALUES
     (2024, 1, 2, 90, 15, 75),
     (2024, 1, 3, 120, 30, 90),
     (2024, 1, 4, 80, 20, 60),
-    (2023, 7, 90, 15, 75, 30),
-    (2023, 8, 120, 30, 90, 30),
-    (2024, 13, 120, 30, 90, 30),
-    (2024, 14, 80, 20, 60, 30),
-    (2024, 15, 110, 25, 85, 30);
+    (2023, 5, 110, 25, 85),
+    (2023, 6, 100, 20, 80),
+    (2023, 7, 90, 15, 75),
+    (2023, 8, 120, 30, 90),
+    (2024, 13, 120, 30, 90),
+    (2024, 14, 80, 20, 60),
+    (2024, 15, 110, 25, 85),
+    (2024, 16, 100, 20, 80),
+    (2024, 2, 85, 20, 65),
+    (2024, 3, 95, 25, 70),
+    (2024, 4, 105, 15, 90),
+    (2024, 5, 80, 10, 70),
+    (2024, 6, 110, 22, 88),
+    (2024, 7, 70, 18, 52),
+    (2024, 8, 115, 28, 87),
+    (2024, 9, 90, 17, 73),
+    (2024, 10, 100, 23, 77),
+    (2024, 11, 105, 20, 85),
+    (2024, 12, 95, 15, 80),
+    (2024, 14, 75, 13, 62),
+    (2024, 15, 85, 18, 67),
+    (2024, 16, 100, 25, 75),
+    (2024, 17, 90, 20, 70),
+    (2024, 18, 110, 27, 83),
+    (2024, 19, 65, 12, 53),
+    (2024, 20, 120, 30, 90),
+    (2024, 21, 80, 15, 65),
+    (2024, 22, 105, 22, 83),
+    (2024, 23, 95, 18, 77),
+    (2024, 24, 115, 25, 90),
+    (2024, 25, 70, 10, 60),
+    (2024, 26, 110, 20, 90),
+    (2024, 27, 75, 15, 60),
+    (2024, 28, 125, 30, 95),
+    (2024, 29, 85, 18, 67),
+    (2024, 30, 95, 22, 73),
+    (2024, 31, 100, 25, 75),
+    (2024, 32, 90, 20, 70),
+    (2024, 33, 110, 27, 83),
+    (2024, 34, 65, 12, 53),
+    (2024, 35, 120, 30, 90),
+    (2024, 36, 80, 15, 65),
+    (2024, 37, 105, 22, 83),
+    (2024, 38, 95, 18, 77);

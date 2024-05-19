@@ -1,11 +1,10 @@
+import 'package:shelfify/core/constants/constants.dart';
 import 'package:shelfify/core/models/models.dart';
-import 'package:shelfify/features/book/data/datasource/books_database.dart';
 
 extension BookExtension on Book {
   Map<String, dynamic> toMap() {
     return {
       'MaSach': id,
-      'MaDauSach': categoryId,
       'NhaXuatBan': publisher,
       'NamXuatBan': publicationYear,
       'SoLuongTon': quantityInStock,
@@ -13,42 +12,31 @@ extension BookExtension on Book {
       'DonGiaNhap': purchasePrice,
     };
   }
-}
 
-extension ToMapExtension on Map<String, dynamic> {
-  Book toModel() {
-    return Book(
-      id: ['MaSach'] as int,
-      categoryId: ['MaDauSach'] as int,
-      publisher: ['NhaXuatBan'] as String,
-      publicationYear: ['NamXuatBan'] as int,
-      quantityInStock: ['SoLuongTon'] as int,
-      sellingPrice: ['DonGiaBan'] as double,
-      purchasePrice: ['DonGiaNhap'] as double,
-    );
+  String getAuthor() {
+    return AUTHORS[id];
+  }
+
+  String getTitle() {
+    return BOOKTITLE[id];
+  }
+
+  String getCategory() {
+    if (CATERGORY_MAPPER[getTitle()] == null) return "Unknown";
+
+    return CATEGORIES[CATERGORY_MAPPER[getTitle()]!];
   }
 }
 
 extension InventoryReportExtension on InventoryReport {
-  static InventoryReport toModel(Map<String, dynamic> map) {
-    return InventoryReport(
-      month: map['Thang'] as int,
-      year: map['Nam'] as int,
-      id: map['MaSach'] as int,
-      startingQuantity: map['SoLuongDauKy'] as int,
-      quantityChange: map['SoLuongPhatSinh'] as int,
-      endingQuantity: map['SoLuongCuoiKy'] as int,
-    );
-  }
-
-  static Map<String, dynamic> toMap(final InventoryReport model) {
+  Map<String, dynamic> toMap() {
     return {
-      'Thang': model.month,
-      'Nam': model.year,
-      'MaSach': model.id,
-      'SoLuongDauKy': model.startingQuantity,
-      'SoLuongPhatSinh': model.quantityChange,
-      'SoLuongCuoiKy': model.endingQuantity,
+      'Thang': month,
+      'Nam': year,
+      'MaSach': id,
+      'SoLuongDauKy': startingQuantity,
+      'SoLuongPhatSinh': quantityChange,
+      'SoLuongCuoiKy': endingQuantity,
     };
   }
 }
@@ -201,22 +189,6 @@ extension InvoiceInfoExtension on InvoiceInfo {
       'SoLuong': quantity,
       'DonGiaBan': unitPrice,
       'ThanhTien': totalPrice,
-    };
-  }
-}
-
-extension BookCategoryExtension on BookCategory {
-  BookCategory toModel(Map<String, dynamic> map) {
-    return BookCategory(
-      categoryId: map['MaDauSach'] as int,
-      categoryName: map['TenDauSach'] as String,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'MaDauSach': categoryId,
-      'TenDauSach': categoryName,
     };
   }
 }

@@ -1,27 +1,27 @@
-import 'dart:io';
-
 import 'package:shelfify/core/constants/constants.dart';
+import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/services/database.provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 typedef BookEntity = Map<String, dynamic>;
+typedef BookTitleEntity = Map<String, dynamic>;
+typedef CategoryEntity = Map<String, dynamic>;
 typedef BookListEntity = List<BookEntity>;
 
-abstract class BooksDatabase {
+abstract class BookDatabase {
   Future<BookListEntity> getAllBooks();
   Future<BookEntity> insertBook(final BookEntity bookEntity);
   Future<void> updateBook(final BookEntity bookEntity);
 }
 
-class BookDatabaseImpl implements BooksDatabase {
-  static const _tableName = 'SACH';
+class BookDatabaseImpl implements BookDatabase {
+  static const _bookTable = 'SACH';
   static const _columnId = 'MaSach';
 
   @override
   Future<BookListEntity> getAllBooks() async {
     final db = await DBProvider.db.database;
-    return db.query(_tableName);
+    return db.query(_bookTable);
   }
 
   @override
@@ -30,12 +30,12 @@ class BookDatabaseImpl implements BooksDatabase {
     late final BookEntity bookEntity;
     await db.transaction((txn) async {
       final id = await txn.insert(
-        _tableName,
+        _bookTable,
         book,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
       final results =
-          await txn.query(_tableName, where: '$_columnId = ?', whereArgs: [id]);
+          await txn.query(_bookTable, where: '$_columnId = ?', whereArgs: [id]);
       bookEntity = results.first;
     });
     return bookEntity;
@@ -46,7 +46,7 @@ class BookDatabaseImpl implements BooksDatabase {
     final db = await DBProvider.db.database;
     final int id = book['id'];
     await db.update(
-      _tableName,
+      _bookTable,
       book,
       where: "$_columnId =?",
       whereArgs: [id],
