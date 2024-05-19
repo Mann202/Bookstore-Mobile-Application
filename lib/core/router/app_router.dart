@@ -3,6 +3,7 @@ import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/login_page.dart";
+import "package:shelfify/main_page.dart";
 
 import "not_found_screen.dart";
 
@@ -13,7 +14,7 @@ GoRouter goRouter(ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => LoginScreen(),
+        builder: (context, state) => MainPage(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),

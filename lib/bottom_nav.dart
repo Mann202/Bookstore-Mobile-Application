@@ -15,9 +15,11 @@ class BottomNavigationBarWidget extends StatefulWidget {
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Colors.transparent,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
