@@ -84,13 +84,6 @@ class AppThemes {
           borderSide: const BorderSide(color: AppColors.accent),
           borderRadius: BorderRadius.circular(4.0),
         ),
-        floatingLabelStyle:
-            WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
-          final Color color = states.contains(WidgetState.focused)
-              ? AppColors.accent
-              : AppColors.white50;
-          return TextStyle(color: color);
-        }),
         labelStyle: AppTextStyles.subtitleLg.copyWith(color: AppColors.white50),
         suffixIconColor: AppColors.accent,
       ),
@@ -113,10 +106,6 @@ class AppThemes {
       ),
       checkboxTheme: CheckboxThemeData(
         shape: const CircleBorder(),
-        checkColor: WidgetStateProperty.all(AppColors.black),
-        fillColor: WidgetStateProperty.all(
-          AppColors.accent,
-        ),
         side: BorderSide(color: AppColors.white20),
       ),
       colorScheme: const ColorScheme.dark(

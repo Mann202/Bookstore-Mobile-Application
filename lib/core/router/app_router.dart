@@ -1,6 +1,7 @@
 import "package:flutter/widgets.dart";
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
+import "package:shelfify/features/settings/presentation/settings_screen.dart";
 
 import "not_found_screen.dart";
 
@@ -11,13 +12,12 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => Container(),
+        builder: (context, state) => const SettingsScreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
 }
-
 
 String _$goRouterHash() => r'e5cabd4f20eef185e81873123268c01a10ec500e';
 
