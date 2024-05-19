@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
 
@@ -34,11 +35,12 @@ class BookDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildDetailRow('Tên sách', book.getTitle()),
-          _buildDetailRow('Tác giả', book.getAuthor()),
-          _buildDetailRow('Thể loại', book.getCategory()),
-          _buildDetailRow('Nhà xuất bản', book.publisher),
-          _buildDetailRow('Năm xuất bản', book.publicationYear.toString()),
+          _buildDetailRow(label: 'Tên sách', value: book.getTitle()),
+          _buildDetailRow(label: 'Tác giả', value: book.getAuthor()),
+          _buildDetailRow(label: 'Thể loại', value: book.getCategory()),
+          _buildDetailRow(label: 'Nhà xuất bản', value: book.publisher),
+          _buildDetailRow(
+              label: 'Năm xuất bản', value: book.publicationYear.toString()),
           const SizedBox(
             height: 20,
           ),
@@ -50,15 +52,27 @@ class BookDetailScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          _buildDetailRow('Số lượng tồn', book.quantityInStock.toString()),
-          _buildDetailRow('Đơn giá nhập', '${book.purchasePrice.toInt()} VND'),
-          _buildDetailRow('Đơn giá bán', '${book.sellingPrice.toInt()} VND'),
+          _buildDetailRow(
+              label: 'Số lượng tồn',
+              value: book.quantityInStock.toString(),
+              textColor: AppColors.primary),
+          _buildDetailRow(
+              label: 'Đơn giá nhập',
+              value: '${book.purchasePrice.toInt()} VND',
+              textColor: AppColors.error),
+          _buildDetailRow(
+              label: 'Đơn giá bán',
+              value: '${book.sellingPrice.toInt()} VND',
+              textColor: AppColors.success),
         ],
       ),
     );
   }
 
-  Widget _buildDetailRow(String label, String value) {
+  Widget _buildDetailRow(
+      {required String label,
+      required String value,
+      Color? textColor = Colors.black}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -71,8 +85,8 @@ class BookDetailScreen extends StatelessWidget {
                   color: Colors.black)),
           Text(
             value,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 20, color: textColor),
           ),
         ],
       ),

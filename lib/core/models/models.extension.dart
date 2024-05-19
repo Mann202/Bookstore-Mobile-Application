@@ -1,10 +1,12 @@
-import 'package:shelfify/core/constants/constants.dart';
 import 'package:shelfify/core/models/models.dart';
 
 extension BookExtension on Book {
   Map<String, dynamic> toMap() {
     return {
       'MaSach': id,
+      'DauSach': title.toMap(),
+      'TacGia': author.toMap(),
+      'TheLoai': category.toMap(),
       'NhaXuatBan': publisher,
       'NamXuatBan': publicationYear,
       'SoLuongTon': quantityInStock,
@@ -14,17 +16,43 @@ extension BookExtension on Book {
   }
 
   String getAuthor() {
-    return AUTHORS[id];
+    return author.authorName;
   }
 
   String getTitle() {
-    return BOOKTITLE[id];
+    return title.bookTitle;
   }
 
   String getCategory() {
-    if (CATERGORY_MAPPER[getTitle()] == null) return "Unknown";
+    return category.categoryName;
+  }
+}
 
-    return CATEGORIES[CATERGORY_MAPPER[getTitle()]! - 1];
+extension BookTitleExtension on BookTitle {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaDauSach": bookTitleId,
+      "TenDauSach": bookTitle,
+      "MaTheLoai": categoryId
+    };
+  }
+}
+
+extension AuthorExtension on Author {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaTacGia": authorId,
+      "TenTacGia": authorName,
+    };
+  }
+}
+
+extension CategoryExtension on Category {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaTheLoai": categoryId,
+      "TenTheLoai": categoryName,
+    };
   }
 }
 

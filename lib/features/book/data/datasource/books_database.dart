@@ -16,12 +16,41 @@ abstract class BookDatabase {
 
 class BookDatabaseImpl implements BookDatabase {
   static const _bookTable = 'SACH';
+  static const _bookTitleTable = 'DAUSACH';
+  static const _categoryTable = 'THELOAI';
   static const _columnId = 'MaSach';
 
   @override
   Future<BookListEntity> getAllBooks() async {
     final db = await DBProvider.db.database;
-    return db.query(_bookTable);
+
+    final bookTable = await db.query(_bookTable);
+    final bookTitleTable = await db.query(_bookTitleTable);
+    final categoryTable = await db.query(_categoryTable);
+    final authorTable = await db.rawQuery('''
+  SELECT *
+  FROM TACGIA
+  JOIN CT_TACGIA
+  ON TACGIA.MaTacGia = CT_TACGIA.MaTacGia
+''');
+
+    final BookListEntity entity = bookTable.map((book) {
+      final bookTitle = bookTitleTable.firstWhere(
+        (title) => title['MaDauSach'] == book['MaDauSach'],
+      );
+      final category = categoryTable.firstWhere(
+        (category) => category['MaTheLoai'] == bookTitle['MaTheLoai'],
+      );
+      final author = authorTable.firstWhere(
+          (author) => author['MaDauSach'] == bookTitle['MaDauSach']);
+      return {
+        ...book,
+        'DauSach': bookTitle,
+        'TheLoai': category,
+        'TacGia': author
+      };
+    }).toList();
+    return entity;
   }
 
   @override

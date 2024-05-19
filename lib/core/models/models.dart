@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shelfify/core/constants/constants.dart';
-
 part 'models.freezed.dart';
 
 @freezed
@@ -106,7 +104,10 @@ class InvoiceInfo with _$InvoiceInfo {
 class Book with _$Book {
   const factory Book({
     required int id,
-    required int bookTitleId,
+    required int titleId,
+    required Author author,
+    required BookTitle title,
+    required Category category,
     required String publisher,
     required int publicationYear,
     required int quantityInStock,
@@ -116,12 +117,15 @@ class Book with _$Book {
 
   factory Book.fromMap(Map<String, dynamic> map) => Book(
         id: map['MaSach'] as int,
-        bookTitleId: map['MaDauSach'] as int,
+        category: Category.fromMap(map['TheLoai'] as Map<String, dynamic>),
+        title: BookTitle.fromMap(map['DauSach'] as Map<String, dynamic>),
+        author: Author.fromMap(map['TacGia'] as Map<String, dynamic>),
         publisher: map['NhaXuatBan'] as String,
         publicationYear: map['NamXuatBan'] as int,
         quantityInStock: map['SoLuongTon'] as int,
         sellingPrice: map['DonGiaBan'] as double,
         purchasePrice: map['DonGiaNhap'] as double,
+        titleId: map['MaDauSach'] as int,
       );
 }
 
@@ -179,5 +183,46 @@ class BookPurchaseReceiptInfo with _$BookPurchaseReceiptInfo {
         quantity: map['SoLuong'] as int,
         purchasePrice: map['DonGia'] as double,
         totalPrice: map['ThanhTien'] as double,
+      );
+}
+
+@freezed
+class Category with _$Category {
+  const factory Category({
+    required int categoryId,
+    required String categoryName,
+  }) = _Category;
+
+  factory Category.fromMap(Map<String, dynamic> map) => Category(
+        categoryId: map['MaTheLoai'] as int,
+        categoryName: map['TenTheLoai'] as String,
+      );
+}
+
+@freezed
+class BookTitle with _$BookTitle {
+  const factory BookTitle({
+    required int bookTitleId,
+    required String bookTitle,
+    required int categoryId,
+  }) = _BookTitle;
+
+  factory BookTitle.fromMap(Map<String, dynamic> map) => BookTitle(
+        bookTitleId: map['MaDauSach'] as int,
+        categoryId: map['MaTheLoai'] as int,
+        bookTitle: map['TenDauSach'] as String,
+      );
+}
+
+@freezed
+class Author with _$Author {
+  const factory Author({
+    required int authorId,
+    required String authorName,
+  }) = _Author;
+
+  factory Author.fromMap(Map<String, dynamic> map) => Author(
+        authorId: map['MaTacGia'] as int,
+        authorName: map['TenTacGia'] as String,
       );
 }

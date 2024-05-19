@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
-import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 import 'package:shelfify/features/book/presentation/view/book_detail.screen.dart';

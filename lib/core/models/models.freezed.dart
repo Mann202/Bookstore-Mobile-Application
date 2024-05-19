@@ -1086,7 +1086,10 @@ abstract class _InvoiceInfo implements InvoiceInfo {
 /// @nodoc
 mixin _$Book {
   int get id => throw _privateConstructorUsedError;
-  int get bookTitleId => throw _privateConstructorUsedError;
+  int get titleId => throw _privateConstructorUsedError;
+  Author get author => throw _privateConstructorUsedError;
+  BookTitle get title => throw _privateConstructorUsedError;
+  Category get category => throw _privateConstructorUsedError;
   String get publisher => throw _privateConstructorUsedError;
   int get publicationYear => throw _privateConstructorUsedError;
   int get quantityInStock => throw _privateConstructorUsedError;
@@ -1104,12 +1107,19 @@ abstract class $BookCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int bookTitleId,
+      int titleId,
+      Author author,
+      BookTitle title,
+      Category category,
       String publisher,
       int publicationYear,
       int quantityInStock,
       double sellingPrice,
       double purchasePrice});
+
+  $AuthorCopyWith<$Res> get author;
+  $BookTitleCopyWith<$Res> get title;
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -1126,7 +1136,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
   @override
   $Res call({
     Object? id = null,
-    Object? bookTitleId = null,
+    Object? titleId = null,
+    Object? author = null,
+    Object? title = null,
+    Object? category = null,
     Object? publisher = null,
     Object? publicationYear = null,
     Object? quantityInStock = null,
@@ -1138,10 +1151,22 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      bookTitleId: null == bookTitleId
-          ? _value.bookTitleId
-          : bookTitleId // ignore: cast_nullable_to_non_nullable
+      titleId: null == titleId
+          ? _value.titleId
+          : titleId // ignore: cast_nullable_to_non_nullable
               as int,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as Author,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as BookTitle,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
       publisher: null == publisher
           ? _value.publisher
           : publisher // ignore: cast_nullable_to_non_nullable
@@ -1164,6 +1189,30 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
               as double,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthorCopyWith<$Res> get author {
+    return $AuthorCopyWith<$Res>(_value.author, (value) {
+      return _then(_value.copyWith(author: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookTitleCopyWith<$Res> get title {
+    return $BookTitleCopyWith<$Res>(_value.title, (value) {
+      return _then(_value.copyWith(title: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CategoryCopyWith<$Res> get category {
+    return $CategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1175,12 +1224,22 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int bookTitleId,
+      int titleId,
+      Author author,
+      BookTitle title,
+      Category category,
       String publisher,
       int publicationYear,
       int quantityInStock,
       double sellingPrice,
       double purchasePrice});
+
+  @override
+  $AuthorCopyWith<$Res> get author;
+  @override
+  $BookTitleCopyWith<$Res> get title;
+  @override
+  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -1194,7 +1253,10 @@ class __$$BookImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? bookTitleId = null,
+    Object? titleId = null,
+    Object? author = null,
+    Object? title = null,
+    Object? category = null,
     Object? publisher = null,
     Object? publicationYear = null,
     Object? quantityInStock = null,
@@ -1206,10 +1268,22 @@ class __$$BookImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      bookTitleId: null == bookTitleId
-          ? _value.bookTitleId
-          : bookTitleId // ignore: cast_nullable_to_non_nullable
+      titleId: null == titleId
+          ? _value.titleId
+          : titleId // ignore: cast_nullable_to_non_nullable
               as int,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as Author,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as BookTitle,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as Category,
       publisher: null == publisher
           ? _value.publisher
           : publisher // ignore: cast_nullable_to_non_nullable
@@ -1239,7 +1313,10 @@ class __$$BookImplCopyWithImpl<$Res>
 class _$BookImpl implements _Book {
   const _$BookImpl(
       {required this.id,
-      required this.bookTitleId,
+      required this.titleId,
+      required this.author,
+      required this.title,
+      required this.category,
       required this.publisher,
       required this.publicationYear,
       required this.quantityInStock,
@@ -1249,7 +1326,13 @@ class _$BookImpl implements _Book {
   @override
   final int id;
   @override
-  final int bookTitleId;
+  final int titleId;
+  @override
+  final Author author;
+  @override
+  final BookTitle title;
+  @override
+  final Category category;
   @override
   final String publisher;
   @override
@@ -1263,7 +1346,7 @@ class _$BookImpl implements _Book {
 
   @override
   String toString() {
-    return 'Book(id: $id, bookTitleId: $bookTitleId, publisher: $publisher, publicationYear: $publicationYear, quantityInStock: $quantityInStock, sellingPrice: $sellingPrice, purchasePrice: $purchasePrice)';
+    return 'Book(id: $id, titleId: $titleId, author: $author, title: $title, category: $category, publisher: $publisher, publicationYear: $publicationYear, quantityInStock: $quantityInStock, sellingPrice: $sellingPrice, purchasePrice: $purchasePrice)';
   }
 
   @override
@@ -1272,8 +1355,11 @@ class _$BookImpl implements _Book {
         (other.runtimeType == runtimeType &&
             other is _$BookImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.bookTitleId, bookTitleId) ||
-                other.bookTitleId == bookTitleId) &&
+            (identical(other.titleId, titleId) || other.titleId == titleId) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.publisher, publisher) ||
                 other.publisher == publisher) &&
             (identical(other.publicationYear, publicationYear) ||
@@ -1287,8 +1373,18 @@ class _$BookImpl implements _Book {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, bookTitleId, publisher,
-      publicationYear, quantityInStock, sellingPrice, purchasePrice);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      titleId,
+      author,
+      title,
+      category,
+      publisher,
+      publicationYear,
+      quantityInStock,
+      sellingPrice,
+      purchasePrice);
 
   @JsonKey(ignore: true)
   @override
@@ -1300,7 +1396,10 @@ class _$BookImpl implements _Book {
 abstract class _Book implements Book {
   const factory _Book(
       {required final int id,
-      required final int bookTitleId,
+      required final int titleId,
+      required final Author author,
+      required final BookTitle title,
+      required final Category category,
       required final String publisher,
       required final int publicationYear,
       required final int quantityInStock,
@@ -1310,7 +1409,13 @@ abstract class _Book implements Book {
   @override
   int get id;
   @override
-  int get bookTitleId;
+  int get titleId;
+  @override
+  Author get author;
+  @override
+  BookTitle get title;
+  @override
+  Category get category;
   @override
   String get publisher;
   @override
@@ -1922,4 +2027,432 @@ abstract class _BookPurchaseReceiptInfo implements BookPurchaseReceiptInfo {
   @JsonKey(ignore: true)
   _$$BookPurchaseReceiptInfoImplCopyWith<_$BookPurchaseReceiptInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$Category {
+  int get categoryId => throw _privateConstructorUsedError;
+  String get categoryName => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CategoryCopyWith<Category> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CategoryCopyWith<$Res> {
+  factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
+      _$CategoryCopyWithImpl<$Res, Category>;
+  @useResult
+  $Res call({int categoryId, String categoryName});
+}
+
+/// @nodoc
+class _$CategoryCopyWithImpl<$Res, $Val extends Category>
+    implements $CategoryCopyWith<$Res> {
+  _$CategoryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categoryId = null,
+    Object? categoryName = null,
+  }) {
+    return _then(_value.copyWith(
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryName: null == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CategoryImplCopyWith<$Res>
+    implements $CategoryCopyWith<$Res> {
+  factory _$$CategoryImplCopyWith(
+          _$CategoryImpl value, $Res Function(_$CategoryImpl) then) =
+      __$$CategoryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int categoryId, String categoryName});
+}
+
+/// @nodoc
+class __$$CategoryImplCopyWithImpl<$Res>
+    extends _$CategoryCopyWithImpl<$Res, _$CategoryImpl>
+    implements _$$CategoryImplCopyWith<$Res> {
+  __$$CategoryImplCopyWithImpl(
+      _$CategoryImpl _value, $Res Function(_$CategoryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? categoryId = null,
+    Object? categoryName = null,
+  }) {
+    return _then(_$CategoryImpl(
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryName: null == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CategoryImpl implements _Category {
+  const _$CategoryImpl({required this.categoryId, required this.categoryName});
+
+  @override
+  final int categoryId;
+  @override
+  final String categoryName;
+
+  @override
+  String toString() {
+    return 'Category(categoryId: $categoryId, categoryName: $categoryName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CategoryImpl &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
+            (identical(other.categoryName, categoryName) ||
+                other.categoryName == categoryName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, categoryId, categoryName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>
+      __$$CategoryImplCopyWithImpl<_$CategoryImpl>(this, _$identity);
+}
+
+abstract class _Category implements Category {
+  const factory _Category(
+      {required final int categoryId,
+      required final String categoryName}) = _$CategoryImpl;
+
+  @override
+  int get categoryId;
+  @override
+  String get categoryName;
+  @override
+  @JsonKey(ignore: true)
+  _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$BookTitle {
+  int get bookTitleId => throw _privateConstructorUsedError;
+  String get bookTitle => throw _privateConstructorUsedError;
+  int get categoryId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BookTitleCopyWith<BookTitle> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BookTitleCopyWith<$Res> {
+  factory $BookTitleCopyWith(BookTitle value, $Res Function(BookTitle) then) =
+      _$BookTitleCopyWithImpl<$Res, BookTitle>;
+  @useResult
+  $Res call({int bookTitleId, String bookTitle, int categoryId});
+}
+
+/// @nodoc
+class _$BookTitleCopyWithImpl<$Res, $Val extends BookTitle>
+    implements $BookTitleCopyWith<$Res> {
+  _$BookTitleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bookTitleId = null,
+    Object? bookTitle = null,
+    Object? categoryId = null,
+  }) {
+    return _then(_value.copyWith(
+      bookTitleId: null == bookTitleId
+          ? _value.bookTitleId
+          : bookTitleId // ignore: cast_nullable_to_non_nullable
+              as int,
+      bookTitle: null == bookTitle
+          ? _value.bookTitle
+          : bookTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BookTitleImplCopyWith<$Res>
+    implements $BookTitleCopyWith<$Res> {
+  factory _$$BookTitleImplCopyWith(
+          _$BookTitleImpl value, $Res Function(_$BookTitleImpl) then) =
+      __$$BookTitleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int bookTitleId, String bookTitle, int categoryId});
+}
+
+/// @nodoc
+class __$$BookTitleImplCopyWithImpl<$Res>
+    extends _$BookTitleCopyWithImpl<$Res, _$BookTitleImpl>
+    implements _$$BookTitleImplCopyWith<$Res> {
+  __$$BookTitleImplCopyWithImpl(
+      _$BookTitleImpl _value, $Res Function(_$BookTitleImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bookTitleId = null,
+    Object? bookTitle = null,
+    Object? categoryId = null,
+  }) {
+    return _then(_$BookTitleImpl(
+      bookTitleId: null == bookTitleId
+          ? _value.bookTitleId
+          : bookTitleId // ignore: cast_nullable_to_non_nullable
+              as int,
+      bookTitle: null == bookTitle
+          ? _value.bookTitle
+          : bookTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BookTitleImpl implements _BookTitle {
+  const _$BookTitleImpl(
+      {required this.bookTitleId,
+      required this.bookTitle,
+      required this.categoryId});
+
+  @override
+  final int bookTitleId;
+  @override
+  final String bookTitle;
+  @override
+  final int categoryId;
+
+  @override
+  String toString() {
+    return 'BookTitle(bookTitleId: $bookTitleId, bookTitle: $bookTitle, categoryId: $categoryId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookTitleImpl &&
+            (identical(other.bookTitleId, bookTitleId) ||
+                other.bookTitleId == bookTitleId) &&
+            (identical(other.bookTitle, bookTitle) ||
+                other.bookTitle == bookTitle) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, bookTitleId, bookTitle, categoryId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookTitleImplCopyWith<_$BookTitleImpl> get copyWith =>
+      __$$BookTitleImplCopyWithImpl<_$BookTitleImpl>(this, _$identity);
+}
+
+abstract class _BookTitle implements BookTitle {
+  const factory _BookTitle(
+      {required final int bookTitleId,
+      required final String bookTitle,
+      required final int categoryId}) = _$BookTitleImpl;
+
+  @override
+  int get bookTitleId;
+  @override
+  String get bookTitle;
+  @override
+  int get categoryId;
+  @override
+  @JsonKey(ignore: true)
+  _$$BookTitleImplCopyWith<_$BookTitleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$Author {
+  int get authorId => throw _privateConstructorUsedError;
+  String get authorName => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AuthorCopyWith<Author> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthorCopyWith<$Res> {
+  factory $AuthorCopyWith(Author value, $Res Function(Author) then) =
+      _$AuthorCopyWithImpl<$Res, Author>;
+  @useResult
+  $Res call({int authorId, String authorName});
+}
+
+/// @nodoc
+class _$AuthorCopyWithImpl<$Res, $Val extends Author>
+    implements $AuthorCopyWith<$Res> {
+  _$AuthorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? authorId = null,
+    Object? authorName = null,
+  }) {
+    return _then(_value.copyWith(
+      authorId: null == authorId
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
+              as int,
+      authorName: null == authorName
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthorImplCopyWith<$Res> implements $AuthorCopyWith<$Res> {
+  factory _$$AuthorImplCopyWith(
+          _$AuthorImpl value, $Res Function(_$AuthorImpl) then) =
+      __$$AuthorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int authorId, String authorName});
+}
+
+/// @nodoc
+class __$$AuthorImplCopyWithImpl<$Res>
+    extends _$AuthorCopyWithImpl<$Res, _$AuthorImpl>
+    implements _$$AuthorImplCopyWith<$Res> {
+  __$$AuthorImplCopyWithImpl(
+      _$AuthorImpl _value, $Res Function(_$AuthorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? authorId = null,
+    Object? authorName = null,
+  }) {
+    return _then(_$AuthorImpl(
+      authorId: null == authorId
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
+              as int,
+      authorName: null == authorName
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthorImpl implements _Author {
+  const _$AuthorImpl({required this.authorId, required this.authorName});
+
+  @override
+  final int authorId;
+  @override
+  final String authorName;
+
+  @override
+  String toString() {
+    return 'Author(authorId: $authorId, authorName: $authorName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthorImpl &&
+            (identical(other.authorId, authorId) ||
+                other.authorId == authorId) &&
+            (identical(other.authorName, authorName) ||
+                other.authorName == authorName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, authorId, authorName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthorImplCopyWith<_$AuthorImpl> get copyWith =>
+      __$$AuthorImplCopyWithImpl<_$AuthorImpl>(this, _$identity);
+}
+
+abstract class _Author implements Author {
+  const factory _Author(
+      {required final int authorId,
+      required final String authorName}) = _$AuthorImpl;
+
+  @override
+  int get authorId;
+  @override
+  String get authorName;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthorImplCopyWith<_$AuthorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
