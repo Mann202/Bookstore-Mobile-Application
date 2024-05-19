@@ -9,7 +9,9 @@ class BookListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final bookListState = ref.watch(bookListStateNotifierProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -50,7 +52,7 @@ class BookListScreen extends ConsumerWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // Bo tròn góc 8dp
+                    borderRadius: BorderRadius.circular(8), 
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16),
