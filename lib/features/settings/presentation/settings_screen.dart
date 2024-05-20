@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildTextFieldSection(
-                      'Số lượng nhập tối thiểu', '150', TextInputType.number),
+                  'Số lượng nhập tối thiểu', '150', TextInputType.number),
                 buildTextFieldSection(
                   'Số lượng tồn kho tối đa', '300', TextInputType.number),
                 buildTextFieldSection(
