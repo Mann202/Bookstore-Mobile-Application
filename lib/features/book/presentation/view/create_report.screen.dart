@@ -20,16 +20,16 @@ enum Month {
 
 enum Year { Nam2019, Nam2020, Nam2021, Nam2022, Nam2023, Nam2024, Nam2025 }
 
-class CreateReport extends StatefulWidget {
-  const CreateReport({super.key});
+class CreateReportScreen extends StatefulWidget {
+  const CreateReportScreen({super.key});
 
   @override
-  State<CreateReport> createState() {
+  State<CreateReportScreen> createState() {
     return _CreateReportState();
   }
 }
 
-class _CreateReportState extends State<CreateReport> {
+class _CreateReportState extends State<CreateReportScreen> {
   TypeReport _selectedType = TypeReport.BaoCaoTon;
   Month _selectedMonth = Month.Thang1;
   Year _selectedYear = Year.Nam2024;
@@ -129,7 +129,7 @@ Widget _buildDropdownSection<T>(String label, T selectedValue, List<T> values,
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 1),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

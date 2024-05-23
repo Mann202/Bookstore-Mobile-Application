@@ -29,7 +29,7 @@ class CreateReceiptScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,8 +37,22 @@ class CreateReceiptScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                buildInfoColumn('Mã phiếu thu', 'PT0001'),
-                buildInfoColumn('Ngày thu', '15-05-2023', true),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.lightBlue.shade100),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        buildInfoColumn('Mã phiếu thu', 'PT0001'),
+                        buildInfoColumn('Ngày thu', '15-05-2023', true),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 20),
@@ -62,11 +76,11 @@ class CreateReceiptScreen extends StatelessWidget {
                 contentPadding: EdgeInsets.all(15.0),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 fillColor: Color.fromARGB(255, 255, 255, 255),
                 hintText: 'TenKhachHang',
@@ -95,11 +109,11 @@ class CreateReceiptScreen extends StatelessWidget {
                 contentPadding: EdgeInsets.all(15.0),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 fillColor: Color.fromARGB(255, 255, 255, 255),
                 hintText: 'Nhập số tiền thu',
@@ -119,14 +133,14 @@ class CreateReceiptScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    fixedSize: const Size(122, 38),
+                    fixedSize: const Size(180, 45),
                     backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
                   ),
                   child: const Text(
                     'Lưu',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
