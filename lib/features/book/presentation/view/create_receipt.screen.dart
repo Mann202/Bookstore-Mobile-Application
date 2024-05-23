@@ -3,8 +3,8 @@ import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 
-class CreateReceiptsScreen extends StatelessWidget {
-  const CreateReceiptsScreen({super.key});
+class CreateReceiptScreen extends StatelessWidget {
+  const CreateReceiptScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,7 @@ class CreateReceiptsScreen extends StatelessWidget {
             Icons.arrow_back,
             color: AppColors.primary,
           ),
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
         title: const Text(
           'Tạo phiếu thu tiền',
@@ -73,20 +71,19 @@ class CreateReceiptsScreen extends StatelessWidget {
                 fillColor: Color.fromARGB(255, 255, 255, 255),
                 hintText: 'TenKhachHang',
                 hintStyle: TextStyle(
-                  color:  Color.fromARGB(255, 172, 172, 172),
+                  color: Color.fromARGB(255, 172, 172, 172),
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600,
                 ),
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: Icon(Icons.search, size: 30, color: Colors.grey),
               ),
             ),
             const SizedBox(height: 10),
             buildInfoText('Địa chỉ', 'DiaChi'),
             buildInfoText('Điện thoại', 'SoDienThoai'),
             buildInfoText('Email', 'Email'),
-            const SizedBox(height: 10),
             buildColoredInfoText('Công nợ cũ', 'SoTienNo VND', Colors.red),
-            const SizedBox(height: 10),
+            buildInfoText("Số tiền thu", ""),
             const TextField(
               keyboardType: TextInputType.number,
               style: TextStyle(
@@ -107,7 +104,7 @@ class CreateReceiptsScreen extends StatelessWidget {
                 fillColor: Color.fromARGB(255, 255, 255, 255),
                 hintText: 'Nhập số tiền thu',
                 hintStyle: TextStyle(
-                  color:  Color.fromARGB(255, 172, 172, 172),
+                  color: Color.fromARGB(255, 172, 172, 172),
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -115,16 +112,14 @@ class CreateReceiptsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
-              alignment: Alignment.bottomRight,
+                alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                  onPressed: () {
-
-                  }, 
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    fixedSize: const  Size(122, 38),
+                    fixedSize: const Size(122, 38),
                     backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
                   ),
                   child: const Text(
@@ -133,10 +128,9 @@ class CreateReceiptsScreen extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-              )
-            ),
+                )),
           ],
         ),
       ),
@@ -150,10 +144,7 @@ class CreateReceiptsScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 16, 
-            fontWeight: FontWeight.bold,
-            color: Colors.black),
+          style: const TextStyle(fontSize: 16, color: Colors.black),
         ),
         Row(
           children: [
@@ -161,6 +152,7 @@ class CreateReceiptsScreen extends StatelessWidget {
               value,
               style: const TextStyle(
                 fontSize: 16,
+                fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
@@ -184,9 +176,7 @@ class CreateReceiptsScreen extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.black),
+            style: const TextStyle(fontSize: 16, color: Colors.black),
           ),
           Text(
             value,
@@ -205,9 +195,7 @@ class CreateReceiptsScreen extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.black),
+            style: const TextStyle(fontSize: 16, color: Colors.black),
           ),
           Text(
             value,

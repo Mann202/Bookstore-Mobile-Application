@@ -16,9 +16,7 @@ class SettingsScreen extends StatelessWidget {
             Icons.arrow_back,
             color: AppColors.primary,
           ),
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
         title: const Text(
           'Cài đặt',
@@ -31,82 +29,73 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                buildTextFieldSection(
-                  'Số lượng nhập tối thiểu', '150', TextInputType.number),
-                buildTextFieldSection(
-                  'Số lượng tồn kho tối đa', '300', TextInputType.number),
-                buildTextFieldSection(
-                  'Số lượng tồn tối thiểu sau bán', '20', TextInputType.number),
-                buildTextFieldSection(
-                  'Tỉ lệ tính đơn giá bán', '105%', TextInputType.number),
-                buildTextFieldSection(
-                  'Số tiền nợ tối đa', '1.000.000 VND', TextInputType.number),
-                const Text(
-                  'Kiểm tra quy định',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                  ),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildTextFieldSection(
+                'Số lượng nhập tối thiểu', '150', TextInputType.number),
+            buildTextFieldSection(
+                'Số lượng tồn kho tối đa', '300', TextInputType.number),
+            buildTextFieldSection(
+                'Số lượng tồn tối thiểu sau bán', '20', TextInputType.number),
+            buildTextFieldSection(
+                'Tỉ lệ tính đơn giá bán', '105%', TextInputType.number),
+            buildTextFieldSection(
+                'Số tiền nợ tối đa', '1.000.000 VND', TextInputType.number),
+            const Text(
+              'Kiểm tra quy định',
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  'Áp dụng quy định kiểm tra số tiền thu',
                 ),
-                const SizedBox(height: 10,),
-                
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      
-                    }, 
-                    child: const Text(
-                      'Áp dụng quy định kiểm tra số tiền thu',
-                      
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+                alignment: Alignment.bottomRight,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    fixedSize: const Size(122, 38),
+                    backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
+                  ),
+                  child: const Text(
+                    'Lưu',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                ),
-                
-
-                const SizedBox(height: 20,),
-
-                Container(
-                  alignment: Alignment.bottomRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-
-                      }, 
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        fixedSize: const  Size(122, 38),
-                        backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
-                      ),
-                      child: const Text(
-                        'Lưu',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    )
-                  ),
-                
-
-                
-              ],
-            ),
-          )
-      ),
+                )),
+          ],
+        ),
+      )),
     );
   }
 }
 
-Widget buildTextFieldSection(String labelText, String hintText, TextInputType inputType) {
+Widget buildTextFieldSection(
+    String labelText, String hintText, TextInputType inputType) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -139,7 +128,7 @@ Widget buildTextFieldSection(String labelText, String hintText, TextInputType in
           fillColor: const Color.fromARGB(255, 255, 255, 255),
           hintText: hintText,
           hintStyle: const TextStyle(
-            color:  Color.fromARGB(255, 172, 172, 172),
+            color: Color.fromARGB(255, 172, 172, 172),
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
           ),
