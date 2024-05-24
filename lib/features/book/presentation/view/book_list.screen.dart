@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
+import 'package:shelfify/core/models/models.extension.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 
 class BookListScreen extends ConsumerWidget {
@@ -66,7 +67,7 @@ class BookListScreen extends ConsumerWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(books[index].categoryId.toString(),
+                        Text(books[index].getCategory(),
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,

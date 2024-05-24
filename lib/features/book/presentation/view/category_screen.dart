@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -26,18 +27,30 @@ class CategoryScreen extends StatelessWidget {
           crossAxisSpacing: 16.0,
           children: const <Widget>[
             MenuButton(
-                icon: Icons.menu_book_rounded, label: 'Danh sách \nSách'),
+              icon: Icons.menu_book_rounded,
+              label: 'Danh sách \nSách',
+              path: '/bookList',
+            ),
             MenuButton(
-                icon: Icons.people_alt_rounded,
-                label: 'Danh sách \nKhách hàng'),
+              icon: Icons.people_alt_rounded,
+              label: 'Danh sách \nKhách hàng',
+              path: '/listCustomer',
+            ),
             MenuButton(
-                icon: Icons.local_print_shop_rounded,
-                label: 'Danh sách \nPhiếu nhập'),
+              icon: Icons.local_print_shop_rounded,
+              label: 'Danh sách \nPhiếu nhập',
+              path: '',
+            ),
             MenuButton(
-                icon: Icons.receipt_long,
-                label: 'Danh sách \nHóa đơn'),
+              icon: Icons.receipt_long,
+              label: 'Danh sách \nHóa đơn',
+              path: '',
+            ),
             MenuButton(
-                icon: Icons.cases_rounded, label: 'Danh sách \nPhiếu thu'),
+              icon: Icons.cases_rounded,
+              label: 'Danh sách \nPhiếu thu',
+              path: '',
+            ),
           ],
         ),
       ),
@@ -48,8 +61,10 @@ class CategoryScreen extends StatelessWidget {
 class MenuButton extends StatelessWidget {
   final IconData icon;
   final String label;
+  final String path;
 
-  const MenuButton({super.key, required this.icon, required this.label});
+  const MenuButton(
+      {super.key, required this.icon, required this.label, required this.path});
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +74,17 @@ class MenuButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         gradient: const LinearGradient(
           colors: [
-            Color.fromARGB(255, 212,103,30),
-            Color.fromARGB(255, 66,85,155)
+            Color.fromARGB(255, 212, 103, 30),
+            Color.fromARGB(255, 66, 85, 155)
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomLeft,
         ),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          context.go(path);
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
