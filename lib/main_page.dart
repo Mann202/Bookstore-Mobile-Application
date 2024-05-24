@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shelfify/bottom_nav.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
-class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage>{
-
-  int _currentIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,37 +66,12 @@ class _HomePageState extends State<HomePage>{
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               padding: const EdgeInsets.all(10),
-              children: [ // Sửa lỗi ở đây
-                _buildCategoryItem("Danh sách phát", Icons.shelves),
-                _buildCategoryItem("Danh sách khách hàng", Icons.people),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-
-            Container(
-              alignment: Alignment.centerLeft,
-              child: const Text(
-              "DANH SÁCH PHẦN MỀM",
-              style: TextStyle(
-                color: Color(0xFF4758A8),
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-                fontFamily: AppTextStyles.fontFamily
-              ),
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10), 
-              children: [ // Sửa lỗi ở đây
-                _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
+              children: [
+                // Sửa lỗi ở đây
+                InkWell(
+                  child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
+                  onTap: () => context.go("/createPurchaseReceipt"),
+                ),
                 _buildFeatureItem("Lập hoá đơn bán sách", Icons.car_rental),
                 _buildFeatureItem("Lập phiếu thu tiền", Icons.pause_presentation),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
