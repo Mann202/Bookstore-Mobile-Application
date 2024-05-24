@@ -1,5 +1,3 @@
-import 'package:shelfify/core/constants/constants.dart';
-import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/services/database.provider.dart';
 import 'package:sqflite/sqflite.dart';
 

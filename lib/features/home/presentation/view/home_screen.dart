@@ -103,7 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10),
               children: [
                 // Sửa lỗi ở đây
-                _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
+                InkWell(
+                  child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
+                  onTap: () => context.go("/createPurchaseReceipt"),
+                ),
                 _buildFeatureItem("Lập hoá đơn bán sách", Icons.car_rental),
                 _buildFeatureItem(
                     "Lập phiếu thu tiền", Icons.pause_presentation),
