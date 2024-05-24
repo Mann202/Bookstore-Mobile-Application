@@ -1,6 +1,7 @@
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
 import "package:shelfify/features/book/presentation/view/add_new_book.screen.dart";
+import "package:shelfify/features/book/presentation/view/add_new_book_title.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/book/presentation/view/create_receipt.screen.dart";
@@ -25,7 +26,7 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => HoaDonBanSachScreen(),
+        builder: (context, state) => NewTitleScreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
