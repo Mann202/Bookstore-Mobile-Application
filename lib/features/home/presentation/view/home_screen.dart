@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   flex: 1,
                   child: IconButton(
                     onPressed: () {
-                      context.go("/bookList");
+                      context.go("/searchBook");
                     },
                     icon: const Icon(
                       size: 40,
@@ -78,8 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () => context.go("/bookList"),
                 ),
 
-                _buildCategoryItem(
-                    context, "Danh sách khách hàng", Icons.people),
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách khách hàng", Icons.people),
+                  onTap: () => context.go("/listCustomer"),
+                ),
               ],
             ),
             const SizedBox(height: 20),

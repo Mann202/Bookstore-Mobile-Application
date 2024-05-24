@@ -18,20 +18,25 @@ class BookListScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: TextField(
-          decoration: InputDecoration(
-            hintText: 'Nhập mã hoặc tên sách',
-            prefixIcon: const Icon(Icons.search),
-            prefixIconColor: const Color(0xFF4758A8),
-            hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(100.0),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.grey[200],
-          ),
-        ),
+        title: const Text("Danh sách Sách",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Color(0xFF4758A8))),
+        // title: TextField(
+        //   decoration: InputDecoration(
+        //     hintText: 'Nhập mã hoặc tên sách',
+        //     prefixIcon: const Icon(Icons.search),
+        //     prefixIconColor: const Color(0xFF4758A8),
+        //     hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
+        //     border: OutlineInputBorder(
+        //       borderRadius: BorderRadius.circular(100.0),
+        //       borderSide: BorderSide.none,
+        //     ),
+        //     filled: true,
+        //     fillColor: Colors.grey[200],
+        //   ),
+        // ),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,

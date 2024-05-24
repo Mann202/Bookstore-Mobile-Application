@@ -1,7 +1,9 @@
 import "package:go_router/go_router.dart";
 import "package:riverpod_annotation/riverpod_annotation.dart";
-import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
+import "package:shelfify/features/book/presentation/view/search_book_screen.dart";
+import "package:shelfify/features/customer/presentation/view/list_customer_screen.dart";
+import "package:shelfify/features/customer/presentation/view/search_customer_screen.dart";
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
 
@@ -22,6 +24,18 @@ GoRouter goRouter(GoRouterRef ref) {
           GoRoute(
               path: "createPurchaseReceipt",
               builder: (context, state) => const CreatePurchaseReceiptScreen()),
+          GoRoute(
+            path: "searchCustomer",
+            builder: (context, state) => const SearchCustomerScreen(),
+          ),
+          GoRoute(
+            path: "searchBook",
+            builder: (context, state) => const SearchBookScreen(),
+          ),
+          GoRoute(
+            path: "listCustomer",
+            builder: (context, state) => const ListCustomerScreen(),
+          )
         ],
       )
     ],

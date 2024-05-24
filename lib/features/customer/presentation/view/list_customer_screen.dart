@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/features/customer/presentation/provider/customer_provider.dart';
 
-class SearchCustomerScreen extends ConsumerWidget {
-  const SearchCustomerScreen({super.key});
+class ListCustomerScreen extends ConsumerWidget {
+  const ListCustomerScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +18,7 @@ class SearchCustomerScreen extends ConsumerWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Tìm kiếm khách hàng',
+          'Danh sách khách hàng',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
