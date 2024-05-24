@@ -103,8 +103,7 @@ class InvoiceInfo with _$InvoiceInfo {
 @freezed
 class Book with _$Book {
   const factory Book({
-    required int id,
-    required int titleId,
+    int? id,
     required Author author,
     required BookTitle title,
     required Category category,
@@ -125,7 +124,6 @@ class Book with _$Book {
         quantityInStock: map['SoLuongTon'] as int,
         sellingPrice: map['DonGiaBan'] as double,
         purchasePrice: map['DonGiaNhap'] as double,
-        titleId: map['MaDauSach'] as int,
       );
 }
 
