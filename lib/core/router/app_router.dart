@@ -10,6 +10,7 @@ import "package:shelfify/features/book/presentation/view/find_book.screen.dart";
 import "package:shelfify/features/book/presentation/view/print_receipt.screen.dart";
 import "package:shelfify/features/settings/presentation/accounts_screen.dart";
 import "package:shelfify/features/settings/presentation/settings_screen.dart";
+import "package:shelfify/list_screen.dart";
 import "package:shelfify/login_page.dart";
 import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
@@ -29,7 +30,7 @@ GoRouter goRouter(GoRouterRef ref) {
         path: "/",
         builder: (context, state) => HomePage(),
       ),
-      GoRoute(path: '/category', builder: (context, state) => AddNewCustomer()), 
+      GoRoute(path: '/category', builder: (context, state) => ListScreen()), 
       GoRoute(path: '/account', builder: (context, state) => AccountsSreen()),
       GoRoute(path: '/settings', builder: (context, state) => SettingsScreen()),
     ],
