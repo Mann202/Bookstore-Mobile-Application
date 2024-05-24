@@ -34,16 +34,6 @@ class ListCustomerScreen extends ConsumerWidget {
             context.pop();
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.add,
-              color: Color(0xFF4758A8),
-              size: 35,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: customerState.maybeWhen(
         success: (customers) {

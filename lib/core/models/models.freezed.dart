@@ -654,12 +654,13 @@ abstract class _DebtReport implements DebtReport {
 
 /// @nodoc
 mixin _$Invoice {
-  int get invoiceId => throw _privateConstructorUsedError;
-  int get customerId => throw _privateConstructorUsedError;
+  int? get invoiceId => throw _privateConstructorUsedError;
+  Customer get customer => throw _privateConstructorUsedError;
   DateTime get invoiceDate => throw _privateConstructorUsedError;
   double get totalAmount => throw _privateConstructorUsedError;
   double get paymentAmount => throw _privateConstructorUsedError;
   double get remainingAmount => throw _privateConstructorUsedError;
+  List<InvoiceDetail> get invoiceDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $InvoiceCopyWith<Invoice> get copyWith => throw _privateConstructorUsedError;
@@ -671,12 +672,15 @@ abstract class $InvoiceCopyWith<$Res> {
       _$InvoiceCopyWithImpl<$Res, Invoice>;
   @useResult
   $Res call(
-      {int invoiceId,
-      int customerId,
+      {int? invoiceId,
+      Customer customer,
       DateTime invoiceDate,
       double totalAmount,
       double paymentAmount,
-      double remainingAmount});
+      double remainingAmount,
+      List<InvoiceDetail> invoiceDetails});
+
+  $CustomerCopyWith<$Res> get customer;
 }
 
 /// @nodoc
@@ -692,22 +696,23 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceId = null,
-    Object? customerId = null,
+    Object? invoiceId = freezed,
+    Object? customer = null,
     Object? invoiceDate = null,
     Object? totalAmount = null,
     Object? paymentAmount = null,
     Object? remainingAmount = null,
+    Object? invoiceDetails = null,
   }) {
     return _then(_value.copyWith(
-      invoiceId: null == invoiceId
+      invoiceId: freezed == invoiceId
           ? _value.invoiceId
           : invoiceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      customerId: null == customerId
-          ? _value.customerId
-          : customerId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      customer: null == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as Customer,
       invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
@@ -724,7 +729,19 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
           ? _value.remainingAmount
           : remainingAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      invoiceDetails: null == invoiceDetails
+          ? _value.invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CustomerCopyWith<$Res> get customer {
+    return $CustomerCopyWith<$Res>(_value.customer, (value) {
+      return _then(_value.copyWith(customer: value) as $Val);
+    });
   }
 }
 
@@ -736,12 +753,16 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int invoiceId,
-      int customerId,
+      {int? invoiceId,
+      Customer customer,
       DateTime invoiceDate,
       double totalAmount,
       double paymentAmount,
-      double remainingAmount});
+      double remainingAmount,
+      List<InvoiceDetail> invoiceDetails});
+
+  @override
+  $CustomerCopyWith<$Res> get customer;
 }
 
 /// @nodoc
@@ -755,22 +776,23 @@ class __$$InvoiceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceId = null,
-    Object? customerId = null,
+    Object? invoiceId = freezed,
+    Object? customer = null,
     Object? invoiceDate = null,
     Object? totalAmount = null,
     Object? paymentAmount = null,
     Object? remainingAmount = null,
+    Object? invoiceDetails = null,
   }) {
     return _then(_$InvoiceImpl(
-      invoiceId: null == invoiceId
+      invoiceId: freezed == invoiceId
           ? _value.invoiceId
           : invoiceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      customerId: null == customerId
-          ? _value.customerId
-          : customerId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
+      customer: null == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as Customer,
       invoiceDate: null == invoiceDate
           ? _value.invoiceDate
           : invoiceDate // ignore: cast_nullable_to_non_nullable
@@ -787,6 +809,10 @@ class __$$InvoiceImplCopyWithImpl<$Res>
           ? _value.remainingAmount
           : remainingAmount // ignore: cast_nullable_to_non_nullable
               as double,
+      invoiceDetails: null == invoiceDetails
+          ? _value._invoiceDetails
+          : invoiceDetails // ignore: cast_nullable_to_non_nullable
+              as List<InvoiceDetail>,
     ));
   }
 }
@@ -795,17 +821,19 @@ class __$$InvoiceImplCopyWithImpl<$Res>
 
 class _$InvoiceImpl implements _Invoice {
   const _$InvoiceImpl(
-      {required this.invoiceId,
-      required this.customerId,
+      {this.invoiceId,
+      required this.customer,
       required this.invoiceDate,
       required this.totalAmount,
       required this.paymentAmount,
-      required this.remainingAmount});
+      required this.remainingAmount,
+      required final List<InvoiceDetail> invoiceDetails})
+      : _invoiceDetails = invoiceDetails;
 
   @override
-  final int invoiceId;
+  final int? invoiceId;
   @override
-  final int customerId;
+  final Customer customer;
   @override
   final DateTime invoiceDate;
   @override
@@ -814,10 +842,17 @@ class _$InvoiceImpl implements _Invoice {
   final double paymentAmount;
   @override
   final double remainingAmount;
+  final List<InvoiceDetail> _invoiceDetails;
+  @override
+  List<InvoiceDetail> get invoiceDetails {
+    if (_invoiceDetails is EqualUnmodifiableListView) return _invoiceDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_invoiceDetails);
+  }
 
   @override
   String toString() {
-    return 'Invoice(invoiceId: $invoiceId, customerId: $customerId, invoiceDate: $invoiceDate, totalAmount: $totalAmount, paymentAmount: $paymentAmount, remainingAmount: $remainingAmount)';
+    return 'Invoice(invoiceId: $invoiceId, customer: $customer, invoiceDate: $invoiceDate, totalAmount: $totalAmount, paymentAmount: $paymentAmount, remainingAmount: $remainingAmount, invoiceDetails: $invoiceDetails)';
   }
 
   @override
@@ -827,8 +862,8 @@ class _$InvoiceImpl implements _Invoice {
             other is _$InvoiceImpl &&
             (identical(other.invoiceId, invoiceId) ||
                 other.invoiceId == invoiceId) &&
-            (identical(other.customerId, customerId) ||
-                other.customerId == customerId) &&
+            (identical(other.customer, customer) ||
+                other.customer == customer) &&
             (identical(other.invoiceDate, invoiceDate) ||
                 other.invoiceDate == invoiceDate) &&
             (identical(other.totalAmount, totalAmount) ||
@@ -836,12 +871,21 @@ class _$InvoiceImpl implements _Invoice {
             (identical(other.paymentAmount, paymentAmount) ||
                 other.paymentAmount == paymentAmount) &&
             (identical(other.remainingAmount, remainingAmount) ||
-                other.remainingAmount == remainingAmount));
+                other.remainingAmount == remainingAmount) &&
+            const DeepCollectionEquality()
+                .equals(other._invoiceDetails, _invoiceDetails));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, invoiceId, customerId,
-      invoiceDate, totalAmount, paymentAmount, remainingAmount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      invoiceId,
+      customer,
+      invoiceDate,
+      totalAmount,
+      paymentAmount,
+      remainingAmount,
+      const DeepCollectionEquality().hash(_invoiceDetails));
 
   @JsonKey(ignore: true)
   @override
@@ -852,17 +896,18 @@ class _$InvoiceImpl implements _Invoice {
 
 abstract class _Invoice implements Invoice {
   const factory _Invoice(
-      {required final int invoiceId,
-      required final int customerId,
+      {final int? invoiceId,
+      required final Customer customer,
       required final DateTime invoiceDate,
       required final double totalAmount,
       required final double paymentAmount,
-      required final double remainingAmount}) = _$InvoiceImpl;
+      required final double remainingAmount,
+      required final List<InvoiceDetail> invoiceDetails}) = _$InvoiceImpl;
 
   @override
-  int get invoiceId;
+  int? get invoiceId;
   @override
-  int get customerId;
+  Customer get customer;
   @override
   DateTime get invoiceDate;
   @override
@@ -872,42 +917,40 @@ abstract class _Invoice implements Invoice {
   @override
   double get remainingAmount;
   @override
+  List<InvoiceDetail> get invoiceDetails;
+  @override
   @JsonKey(ignore: true)
   _$$InvoiceImplCopyWith<_$InvoiceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$InvoiceInfo {
-  int get invoiceId => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
+mixin _$InvoiceDetail {
   int get quantity => throw _privateConstructorUsedError;
+  Book get book => throw _privateConstructorUsedError;
   double get unitPrice => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $InvoiceInfoCopyWith<InvoiceInfo> get copyWith =>
+  $InvoiceDetailCopyWith<InvoiceDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InvoiceInfoCopyWith<$Res> {
-  factory $InvoiceInfoCopyWith(
-          InvoiceInfo value, $Res Function(InvoiceInfo) then) =
-      _$InvoiceInfoCopyWithImpl<$Res, InvoiceInfo>;
+abstract class $InvoiceDetailCopyWith<$Res> {
+  factory $InvoiceDetailCopyWith(
+          InvoiceDetail value, $Res Function(InvoiceDetail) then) =
+      _$InvoiceDetailCopyWithImpl<$Res, InvoiceDetail>;
   @useResult
-  $Res call(
-      {int invoiceId,
-      int id,
-      int quantity,
-      double unitPrice,
-      double totalPrice});
+  $Res call({int quantity, Book book, double unitPrice, double totalPrice});
+
+  $BookCopyWith<$Res> get book;
 }
 
 /// @nodoc
-class _$InvoiceInfoCopyWithImpl<$Res, $Val extends InvoiceInfo>
-    implements $InvoiceInfoCopyWith<$Res> {
-  _$InvoiceInfoCopyWithImpl(this._value, this._then);
+class _$InvoiceDetailCopyWithImpl<$Res, $Val extends InvoiceDetail>
+    implements $InvoiceDetailCopyWith<$Res> {
+  _$InvoiceDetailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -917,25 +960,20 @@ class _$InvoiceInfoCopyWithImpl<$Res, $Val extends InvoiceInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceId = null,
-    Object? id = null,
     Object? quantity = null,
+    Object? book = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
   }) {
     return _then(_value.copyWith(
-      invoiceId: null == invoiceId
-          ? _value.invoiceId
-          : invoiceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      book: null == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as Book,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -946,54 +984,55 @@ class _$InvoiceInfoCopyWithImpl<$Res, $Val extends InvoiceInfo>
               as double,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookCopyWith<$Res> get book {
+    return $BookCopyWith<$Res>(_value.book, (value) {
+      return _then(_value.copyWith(book: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$InvoiceInfoImplCopyWith<$Res>
-    implements $InvoiceInfoCopyWith<$Res> {
-  factory _$$InvoiceInfoImplCopyWith(
-          _$InvoiceInfoImpl value, $Res Function(_$InvoiceInfoImpl) then) =
-      __$$InvoiceInfoImplCopyWithImpl<$Res>;
+abstract class _$$InvoiceDetailImplCopyWith<$Res>
+    implements $InvoiceDetailCopyWith<$Res> {
+  factory _$$InvoiceDetailImplCopyWith(
+          _$InvoiceDetailImpl value, $Res Function(_$InvoiceDetailImpl) then) =
+      __$$InvoiceDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int invoiceId,
-      int id,
-      int quantity,
-      double unitPrice,
-      double totalPrice});
+  $Res call({int quantity, Book book, double unitPrice, double totalPrice});
+
+  @override
+  $BookCopyWith<$Res> get book;
 }
 
 /// @nodoc
-class __$$InvoiceInfoImplCopyWithImpl<$Res>
-    extends _$InvoiceInfoCopyWithImpl<$Res, _$InvoiceInfoImpl>
-    implements _$$InvoiceInfoImplCopyWith<$Res> {
-  __$$InvoiceInfoImplCopyWithImpl(
-      _$InvoiceInfoImpl _value, $Res Function(_$InvoiceInfoImpl) _then)
+class __$$InvoiceDetailImplCopyWithImpl<$Res>
+    extends _$InvoiceDetailCopyWithImpl<$Res, _$InvoiceDetailImpl>
+    implements _$$InvoiceDetailImplCopyWith<$Res> {
+  __$$InvoiceDetailImplCopyWithImpl(
+      _$InvoiceDetailImpl _value, $Res Function(_$InvoiceDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? invoiceId = null,
-    Object? id = null,
     Object? quantity = null,
+    Object? book = null,
     Object? unitPrice = null,
     Object? totalPrice = null,
   }) {
-    return _then(_$InvoiceInfoImpl(
-      invoiceId: null == invoiceId
-          ? _value.invoiceId
-          : invoiceId // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_$InvoiceDetailImpl(
       quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      book: null == book
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as Book,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -1008,20 +1047,17 @@ class __$$InvoiceInfoImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InvoiceInfoImpl implements _InvoiceInfo {
-  const _$InvoiceInfoImpl(
-      {required this.invoiceId,
-      required this.id,
-      required this.quantity,
+class _$InvoiceDetailImpl implements _InvoiceDetail {
+  const _$InvoiceDetailImpl(
+      {required this.quantity,
+      required this.book,
       required this.unitPrice,
       required this.totalPrice});
 
   @override
-  final int invoiceId;
-  @override
-  final int id;
-  @override
   final int quantity;
+  @override
+  final Book book;
   @override
   final double unitPrice;
   @override
@@ -1029,19 +1065,17 @@ class _$InvoiceInfoImpl implements _InvoiceInfo {
 
   @override
   String toString() {
-    return 'InvoiceInfo(invoiceId: $invoiceId, id: $id, quantity: $quantity, unitPrice: $unitPrice, totalPrice: $totalPrice)';
+    return 'InvoiceDetail(quantity: $quantity, book: $book, unitPrice: $unitPrice, totalPrice: $totalPrice)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InvoiceInfoImpl &&
-            (identical(other.invoiceId, invoiceId) ||
-                other.invoiceId == invoiceId) &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$InvoiceDetailImpl &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
+            (identical(other.book, book) || other.book == book) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
             (identical(other.totalPrice, totalPrice) ||
@@ -1050,36 +1084,33 @@ class _$InvoiceInfoImpl implements _InvoiceInfo {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, invoiceId, id, quantity, unitPrice, totalPrice);
+      Object.hash(runtimeType, quantity, book, unitPrice, totalPrice);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InvoiceInfoImplCopyWith<_$InvoiceInfoImpl> get copyWith =>
-      __$$InvoiceInfoImplCopyWithImpl<_$InvoiceInfoImpl>(this, _$identity);
+  _$$InvoiceDetailImplCopyWith<_$InvoiceDetailImpl> get copyWith =>
+      __$$InvoiceDetailImplCopyWithImpl<_$InvoiceDetailImpl>(this, _$identity);
 }
 
-abstract class _InvoiceInfo implements InvoiceInfo {
-  const factory _InvoiceInfo(
-      {required final int invoiceId,
-      required final int id,
-      required final int quantity,
+abstract class _InvoiceDetail implements InvoiceDetail {
+  const factory _InvoiceDetail(
+      {required final int quantity,
+      required final Book book,
       required final double unitPrice,
-      required final double totalPrice}) = _$InvoiceInfoImpl;
+      required final double totalPrice}) = _$InvoiceDetailImpl;
 
   @override
-  int get invoiceId;
-  @override
-  int get id;
-  @override
   int get quantity;
+  @override
+  Book get book;
   @override
   double get unitPrice;
   @override
   double get totalPrice;
   @override
   @JsonKey(ignore: true)
-  _$$InvoiceInfoImplCopyWith<_$InvoiceInfoImpl> get copyWith =>
+  _$$InvoiceDetailImplCopyWith<_$InvoiceDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

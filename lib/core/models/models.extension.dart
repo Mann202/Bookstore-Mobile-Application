@@ -1,5 +1,30 @@
 import 'package:shelfify/core/models/models.dart';
 
+extension InvoiceExtension on Invoice {
+  Map<String, dynamic> toMap() {
+    return {
+      'MaHoaDon': invoiceId,
+      'NgayLap': invoiceDate.toIso8601String(),
+      'TongTien': totalAmount,
+      'ChiTietHoaDon': invoiceDetails.map((e) => e.toMap()).toList(),
+      'KhachHang': customer.toMap(),
+      'ThanhToan': paymentAmount,
+      'ConLai': remainingAmount,
+    };
+  }
+}
+
+extension InvoiceDetailExtension on InvoiceDetail {
+  Map<String, dynamic> toMap() {
+    return {
+      'SoLuong': quantity,
+      'Sach': book.toMap(),
+      'DonGia': unitPrice,
+      'TongTien': totalPrice,
+    };
+  }
+}
+
 extension CustomerExtension on Customer {
   Map<String, dynamic> toMap() {
     return {
