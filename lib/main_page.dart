@@ -40,10 +40,39 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                Flexible(
+                  flex: 4,
+                  child: Container(),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () {
+                      context.go("/searchBook");
+                    },
+                    icon: const Icon(
+                      size: 40,
+                      Icons.search,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                )
               ],
             ),
 
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách Sách", Icons.shelves),
+                  onTap: () => context.go("/bookList"),
+                ),
+
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách khách hàng", Icons.people),
+                  onTap: () => context.go("/listCustomer"),
+                ),
+              ],
+            ),
             const SizedBox(height: 20),
             
             Container(

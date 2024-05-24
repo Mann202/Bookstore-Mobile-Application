@@ -6,6 +6,9 @@ import "package:shelfify/features/book/presentation/view/add_new_customer.screen
 import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/book/presentation/view/category_screen.dart";
+import "package:shelfify/features/book/presentation/view/search_book_screen.dart";
+import "package:shelfify/features/customer/presentation/view/list_customer_screen.dart";
+import "package:shelfify/features/customer/presentation/view/search_customer_screen.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
 import "package:shelfify/main_page.dart";
 
@@ -24,14 +27,20 @@ GoRouter goRouter(GoRouterRef ref) {
             builder: (context, state) => const BookListScreen(),
           ),
           GoRoute(
-            path: "createPurchaseReceipt",
-            builder: (context, state) => const CreatePurchaseReceiptScreen(),
+              path: "createPurchaseReceipt",
+              builder: (context, state) => const CreatePurchaseReceiptScreen()),
+          GoRoute(
+            path: "searchCustomer",
+            builder: (context, state) => const SearchCustomerScreen(),
           ),
           GoRoute(
-            path: "addNewBookInvoice",
-            builder: (context, state) => const HoaDonBanSachScreen(),
+            path: "searchBook",
+            builder: (context, state) => const SearchBookScreen(),
           ),
-          
+          GoRoute(
+            path: "listCustomer",
+            builder: (context, state) => const ListCustomerScreen(),
+          )
         ],
       )
     ],
