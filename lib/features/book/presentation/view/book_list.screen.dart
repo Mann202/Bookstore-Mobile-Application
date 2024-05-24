@@ -9,13 +9,7 @@ class BookListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-<<<<<<< HEAD
-
     final bookListState = ref.watch(bookListStateNotifierProvider);
-
-=======
-    final bookListState = ref.watch(bookListStateNotifierProvider);
->>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -56,11 +50,7 @@ class BookListScreen extends ConsumerWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
-<<<<<<< HEAD
-                    borderRadius: BorderRadius.circular(8), 
-=======
                     borderRadius: BorderRadius.circular(8), // Bo tròn góc 8dp
->>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16),
@@ -77,59 +67,6 @@ class BookListScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(books[index].categoryId.toString(),
-<<<<<<< HEAD
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: AppTextStyles.fontFamily)),
-                        Text('Thể loại: ${books[index]}',
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: AppTextStyles.fontFamily)),
-                      ],
-                    ),
-                    trailing: Text('Tồn kho: ${books[index].quantityInStock}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: AppTextStyles.fontFamily)),
-                  ));
-            },
-          );
-        },
-        orElse: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-      body: ref.watch(bookListStateNotifier).maybeWhen(
-            success: (books) {
-              return ListView.builder(
-                itemCount: books.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BookDetailScreen(book: books[index]);
-                          });
-                    },
-                    child: Card(
-                        color: Colors.white,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(8), // Bo tròn góc 8dp
-                        ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(16),
-                          tileColor: Colors.grey[200],
-                          title: Text(
-                            books[index].getTitle(),
-=======
->>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
