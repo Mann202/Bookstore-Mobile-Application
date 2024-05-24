@@ -39,17 +39,17 @@ class CategoryScreen extends StatelessWidget {
             MenuButton(
               icon: Icons.local_print_shop_rounded,
               label: 'Danh sách \nPhiếu nhập',
-              path: '',
+              path: '', //Dien path do day nhe
             ),
             MenuButton(
               icon: Icons.receipt_long,
               label: 'Danh sách \nHóa đơn',
-              path: '',
+              path: '', //Dien path do day nua
             ),
             MenuButton(
               icon: Icons.cases_rounded,
               label: 'Danh sách \nPhiếu thu',
-              path: '',
+              path: '', //Dien mot cai nay nua nhe
             ),
           ],
         ),

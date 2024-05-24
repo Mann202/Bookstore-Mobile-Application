@@ -27,9 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search, ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                      ),
                       hintText: "Tra cứu sách",
-                      hintStyle: const TextStyle(fontFamily: AppTextStyles.fontFamily, fontSize: 20.0, color: Colors.black),
+                      hintStyle: const TextStyle(
+                          fontFamily: AppTextStyles.fontFamily,
+                          fontSize: 20.0,
+                          color: Colors.black),
                       prefixIconColor: const Color(0xFF4758A8),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
@@ -59,36 +64,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-
-                InkWell(
-                  child: _buildCategoryItem(
-                      context, "Danh sách Sách", Icons.shelves),
-                  onTap: () => context.go("/bookList"),
-                ),
-
-                InkWell(
-                  child: _buildCategoryItem(
-                      context, "Danh sách khách hàng", Icons.people),
-                  onTap: () => context.go("/listCustomer"),
-                ),
-              ],
+            InkWell(
+              child: _buildCategoryItem("Danh sách Sách", Icons.shelves),
+              onTap: () => context.go("/bookList"),
+            ),
+            InkWell(
+              child: _buildCategoryItem("Danh sách khách hàng", Icons.people),
+              onTap: () => context.go("/listCustomer"),
             ),
             const SizedBox(height: 20),
-            
             Container(
               alignment: Alignment.centerLeft,
-              child: const Text(
-              "DANH MỤC CƠ BẢN",
-              style: TextStyle(
-                color: Color(0xFF4758A8),
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                fontFamily: AppTextStyles.fontFamily,
-              )
-            ),),
-
+              child: const Text("DANH MỤC CƠ BẢN",
+                  style: TextStyle(
+                    color: Color(0xFF4758A8),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    fontFamily: AppTextStyles.fontFamily,
+                  )),
+            ),
             const SizedBox(height: 10),
-
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
@@ -102,10 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () => context.go("/createPurchaseReceipt"),
                 ),
                 InkWell(
-                  child: _buildFeatureItem("Lập hoá đơn bán sách", Icons.car_rental),
+                  child: _buildFeatureItem(
+                      "Lập hoá đơn bán sách", Icons.car_rental),
                   onTap: () => context.go("/addNewBookInvoice"),
                 ),
-                _buildFeatureItem("Lập phiếu thu tiền", Icons.pause_presentation),
+                _buildFeatureItem(
+                    "Lập phiếu thu tiền", Icons.pause_presentation),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
               ],
             ),
@@ -120,13 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFC7B3CC),
-            Color(0xFF268AB2)
-          ]
-        ),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFC7B3CC), Color(0xFF268AB2)]),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -152,13 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFC7B3CC),
-            Color(0xFF268AB2)
-          ]
-        ),
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFC7B3CC), Color(0xFF268AB2)]),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
