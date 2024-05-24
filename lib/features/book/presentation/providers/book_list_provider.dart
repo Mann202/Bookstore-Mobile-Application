@@ -1,11 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/state/state.dart';
-import 'package:shelfify/features/book/domain/book_usecase.dart';
 import 'package:shelfify/features/book/domain/domain_module.dart';
+import 'package:shelfify/features/book/domain/usecase/create_book_usecase.dart';
+import 'package:shelfify/features/book/domain/usecase/get_all_books_usecase.dart';
+import 'package:shelfify/features/book/domain/usecase/update_book_usecase.dart';
 
 final bookListStateNotifierProvider =
-    StateNotifierProvider.autoDispose<BookListStateNotifier, State<List<Book>>>(
+    StateNotifierProvider<BookListStateNotifier, State<List<Book>>>(
   (ref) => BookListStateNotifier(
     ref.read(getAllBooksUseCaseProvider),
     ref.read(createBookUseCaseProvider),
@@ -19,10 +21,8 @@ class BookListStateNotifier extends StateNotifier<State<List<Book>>> {
   final UpdateBookUsecase updateBookUsecase;
 
   BookListStateNotifier(
-    this.getAllBooksUseCase,
-    this.createBookUseCase,
-    this.updateBookUsecase,
-  ) : super(const State.init()) {
+      this.getAllBooksUseCase, this.createBookUseCase, this.updateBookUsecase)
+      : super(const State.init()) {
     getAllBooks();
   }
 
@@ -40,7 +40,8 @@ class BookListStateNotifier extends StateNotifier<State<List<Book>>> {
     try {
       state = const State.loading();
       await createBookUseCase.execute(book);
-      final bookList = [...state.data!, book];
+      final bookList = state.data!;
+      bookList.add(book);
       state = State.success(bookList);
     } on Exception catch (e) {
       state = State.error(e);

@@ -7,10 +7,10 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,33 +22,30 @@ class _HomeScreenState extends State<HomeScreen> {
             AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
+              title: Image.asset("assets/logo.png", height: 40),
               actions: [
-                Flexible(
-                  flex: 1,
-                  child: Center(
-                    child: Image.asset(
-                      "assets/logo.png",
-                      height: 40,
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.search,
+                      ),
+                      hintText: "Tra cứu sách",
+                      hintStyle: const TextStyle(
+                          fontFamily: AppTextStyles.fontFamily,
+                          fontSize: 20.0,
+                          color: Colors.black),
+                      prefixIconColor: const Color(0xFF4758A8),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
                     ),
                   ),
                 ),
-                Flexible(
-                  flex: 4,
-                  child: Container(),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () {
-                      context.go("/bookList");
-                    },
-                    icon: const Icon(
-                      size: 40,
-                      Icons.search,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                )
+                const SizedBox(width: 10),
               ],
             ),
             const SizedBox(height: 20),
@@ -71,15 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10),
               children: [
                 // Sửa lỗi ở đây
-
-                InkWell(
-                  child: _buildCategoryItem(
-                      context, "Danh sách Sách", Icons.shelves),
-                  onTap: () => context.go("/bookList"),
-                ),
-
-                _buildCategoryItem(
-                    context, "Danh sách khách hàng", Icons.people),
+                _buildCategoryItem("Danh sách phát", Icons.shelves),
+                _buildCategoryItem("Danh sách khách hàng", Icons.people),
               ],
             ),
             const SizedBox(height: 20),
@@ -117,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // Hàm xây dựng item cho danh mục
-  Widget _buildCategoryItem(BuildContext context, String title, IconData icon) {
+  Widget _buildCategoryItem(String title, IconData icon) {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -136,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 16,
             ),
             textAlign: TextAlign.center,
           ),
@@ -167,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
               ),

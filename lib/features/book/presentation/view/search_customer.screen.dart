@@ -4,30 +4,25 @@ import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 
-class BookListScreen extends ConsumerWidget {
-  const BookListScreen({super.key});
+class SearchCustomer extends ConsumerWidget {
+  const SearchCustomer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bookListState = ref.watch(bookListStateNotifierProvider);
+
+    final bookListState = ref.watch(bookListStateNotifierProvider); //KhachHangProvider
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: TextField(
-          decoration: InputDecoration(
-            hintText: 'Nhập mã hoặc tên sách',
-            prefixIcon: const Icon(Icons.search),
-            prefixIconColor: const Color(0xFF4758A8),
-            hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(100.0),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.grey[200],
-          ),
+        title: const Text(
+          'Tìm kiếm khách hàng',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Color(0xFF4758A8)),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -39,7 +34,18 @@ class BookListScreen extends ConsumerWidget {
             context.pop();
           },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.add,
+              color: Color(0xFF4758A8),
+              size: 35,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
+
       body: bookListState.maybeWhen(
         success: (books) {
           return ListView.builder(
@@ -50,13 +56,13 @@ class BookListScreen extends ConsumerWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // Bo tròn góc 8dp
+                    borderRadius: BorderRadius.circular(8), 
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16),
                     tileColor: Colors.grey[200],
                     title: Text(
-                      books[index].publisher,
+                      books[index].publisher, //Tên khách hàng
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 25,
@@ -66,19 +72,19 @@ class BookListScreen extends ConsumerWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(books[index].categoryId.toString(),
+                        Text(books[index].categoryId.toString(), //Số điện thoại
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontFamily: AppTextStyles.fontFamily)),
-                        Text('Thể loại: ${books[index]}',
+                        Text('Email: ${books[index]}',
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontFamily: AppTextStyles.fontFamily)),
                       ],
                     ),
-                    trailing: Text('Tồn kho: ${books[index].quantityInStock}',
+                    trailing: Text('Số tiền nợ: ${books[index].quantityInStock}',
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 15,
