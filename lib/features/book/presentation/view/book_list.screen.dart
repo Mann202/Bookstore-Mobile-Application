@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
-import 'package:shelfify/core/models/models.extension.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
-import 'package:shelfify/features/book/presentation/view/book_detail.screen.dart';
 
 class BookListScreen extends ConsumerWidget {
   const BookListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+<<<<<<< HEAD
 
     final bookListState = ref.watch(bookListStateNotifierProvider);
 
+=======
+    final bookListState = ref.watch(bookListStateNotifierProvider);
+>>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -55,7 +56,11 @@ class BookListScreen extends ConsumerWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
+<<<<<<< HEAD
                     borderRadius: BorderRadius.circular(8), 
+=======
+                    borderRadius: BorderRadius.circular(8), // Bo tròn góc 8dp
+>>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16),
@@ -72,6 +77,7 @@ class BookListScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(books[index].categoryId.toString(),
+<<<<<<< HEAD
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -122,42 +128,32 @@ class BookListScreen extends ConsumerWidget {
                           tileColor: Colors.grey[200],
                           title: Text(
                             books[index].getTitle(),
+=======
+>>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
                             style: const TextStyle(
                                 color: Colors.black,
-                                fontSize: 25,
-                                fontFamily: AppTextStyles.fontFamily,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(books[index].getAuthor(),
-                                  style: TextStyle(
-                                      color: AppColors.black50,
-                                      fontSize: 20,
-                                      fontFamily: AppTextStyles.fontFamily)),
-                              Text('Thể loại: ${books[index].getCategory()}',
-                                  style: TextStyle(
-                                      color: AppColors.black50,
-                                      fontSize: 18,
-                                      fontFamily: AppTextStyles.fontFamily)),
-                            ],
-                          ),
-                          trailing: Text(
-                              'Tồn kho: ${books[index].quantityInStock}',
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontFamily: AppTextStyles.fontFamily)),
-                        )),
-                  );
-                },
-              );
+                                fontSize: 20,
+                                fontFamily: AppTextStyles.fontFamily)),
+                        Text('Thể loại: ${books[index]}',
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: AppTextStyles.fontFamily)),
+                      ],
+                    ),
+                    trailing: Text('Tồn kho: ${books[index].quantityInStock}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: AppTextStyles.fontFamily)),
+                  ));
             },
-            orElse: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
+          );
+        },
+        orElse: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

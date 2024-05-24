@@ -10,6 +10,7 @@ import "package:shelfify/features/book/presentation/view/print_receipt.screen.da
 import "package:shelfify/features/settings/presentation/accounts_screen.dart";
 import "package:shelfify/features/settings/presentation/settings_screen.dart";
 import "package:shelfify/login_page.dart";
+<<<<<<< HEAD
 import "package:shelfify/features/book/presentation/view/book_detail.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
@@ -17,6 +18,8 @@ import "package:shelfify/features/book/presentation/view/add_new_book_invoice.sc
 import "package:shelfify/features/book/presentation/view/add_new_customer.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/book/presentation/view/search_customer.screen.dart";
+=======
+>>>>>>> parent of 7a3c3e2 (Merge remote-tracking branch 'origin/khoi')
 
 import "not_found_screen.dart";
 
@@ -26,13 +29,7 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => HomeScreen(),
-        routes: [
-          GoRoute(
-            path: "bookList",
-            builder: (context, state) => const BookListScreen(),
-          ),
-        ],
+        builder: (context, state) => const CreateReceiptScreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
