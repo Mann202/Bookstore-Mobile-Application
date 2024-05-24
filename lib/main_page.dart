@@ -112,6 +112,7 @@ class _HomePageState extends State<HomePage>{
           ],
         ),
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 0,),
     );
   }
 

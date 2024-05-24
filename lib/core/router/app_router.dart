@@ -17,6 +17,7 @@ import "package:shelfify/features/book/presentation/view/add_new_book_invoice.sc
 import "package:shelfify/features/book/presentation/view/add_new_customer.screen.dart";
 import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/book/presentation/view/search_customer.screen.dart";
+import "package:shelfify/main_page.dart";
 
 import "not_found_screen.dart";
 
@@ -26,8 +27,11 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => NewTitleScreen(),
-      )
+        builder: (context, state) => HomePage(),
+      ),
+      GoRoute(path: '/category', builder: (context, state) => AddNewCustomer()), 
+      GoRoute(path: '/account', builder: (context, state) => AccountsSreen()),
+      GoRoute(path: '/settings', builder: (context, state) => SettingsScreen()),
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
