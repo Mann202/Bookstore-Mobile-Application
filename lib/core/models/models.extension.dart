@@ -1,11 +1,12 @@
 import 'package:shelfify/core/models/models.dart';
-import 'package:shelfify/features/book/data/datasource/books_database.dart';
 
 extension BookExtension on Book {
   Map<String, dynamic> toMap() {
     return {
       'MaSach': id,
-      'MaDauSach': categoryId,
+      'DauSach': title.toMap(),
+      'TacGia': author.toMap(),
+      'TheLoai': category.toMap(),
       'NhaXuatBan': publisher,
       'NamXuatBan': publicationYear,
       'SoLuongTon': quantityInStock,
@@ -13,42 +14,57 @@ extension BookExtension on Book {
       'DonGiaNhap': purchasePrice,
     };
   }
+
+  String getAuthor() {
+    return author.authorName;
+  }
+
+  String getTitle() {
+    return title.bookTitle;
+  }
+
+  String getCategory() {
+    return category.categoryName;
+  }
 }
 
-extension ToMapExtension on Map<String, dynamic> {
-  Book toModel() {
-    return Book(
-      id: ['MaSach'] as int,
-      categoryId: ['MaDauSach'] as int,
-      publisher: ['NhaXuatBan'] as String,
-      publicationYear: ['NamXuatBan'] as int,
-      quantityInStock: ['SoLuongTon'] as int,
-      sellingPrice: ['DonGiaBan'] as double,
-      purchasePrice: ['DonGiaNhap'] as double,
-    );
+extension BookTitleExtension on BookTitle {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaDauSach": bookTitleId,
+      "TenDauSach": bookTitle,
+      "MaTheLoai": categoryId
+    };
+  }
+}
+
+extension AuthorExtension on Author {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaTacGia": authorId,
+      "TenTacGia": authorName,
+    };
+  }
+}
+
+extension CategoryExtension on Category {
+  Map<String, dynamic> toMap() {
+    return {
+      "MaTheLoai": categoryId,
+      "TenTheLoai": categoryName,
+    };
   }
 }
 
 extension InventoryReportExtension on InventoryReport {
-  static InventoryReport toModel(Map<String, dynamic> map) {
-    return InventoryReport(
-      month: map['Thang'] as int,
-      year: map['Nam'] as int,
-      id: map['MaSach'] as int,
-      startingQuantity: map['SoLuongDauKy'] as int,
-      quantityChange: map['SoLuongPhatSinh'] as int,
-      endingQuantity: map['SoLuongCuoiKy'] as int,
-    );
-  }
-
-  static Map<String, dynamic> toMap(final InventoryReport model) {
+  Map<String, dynamic> toMap() {
     return {
-      'Thang': model.month,
-      'Nam': model.year,
-      'MaSach': model.id,
-      'SoLuongDauKy': model.startingQuantity,
-      'SoLuongPhatSinh': model.quantityChange,
-      'SoLuongCuoiKy': model.endingQuantity,
+      'Thang': month,
+      'Nam': year,
+      'MaSach': id,
+      'SoLuongDauKy': startingQuantity,
+      'SoLuongPhatSinh': quantityChange,
+      'SoLuongCuoiKy': endingQuantity,
     };
   }
 }
@@ -201,22 +217,6 @@ extension InvoiceInfoExtension on InvoiceInfo {
       'SoLuong': quantity,
       'DonGiaBan': unitPrice,
       'ThanhTien': totalPrice,
-    };
-  }
-}
-
-extension BookCategoryExtension on BookCategory {
-  BookCategory toModel(Map<String, dynamic> map) {
-    return BookCategory(
-      categoryId: map['MaDauSach'] as int,
-      categoryName: map['TenDauSach'] as String,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'MaDauSach': categoryId,
-      'TenDauSach': categoryName,
     };
   }
 }

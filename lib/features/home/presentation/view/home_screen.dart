@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shelfify/bottom_nav.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shelfify/core/constants/styles/app_colors.dart';
+import 'package:shelfify/features/home/presentation/view/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
-
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage>{
-
+class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   void _onItemTapped(int index) {
@@ -29,83 +29,91 @@ class _HomePageState extends State<HomePage>{
             AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
-              title: Image.asset("assets/logo.png", height: 40),
               actions: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search, ),
-                      hintText: "Tra cứu sách",
-                      hintStyle: const TextStyle(fontFamily: AppTextStyles.fontFamily, fontSize: 20.0, color: Colors.black),
-                      prefixIconColor: const Color(0xFF4758A8),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
+                Flexible(
+                  flex: 1,
+                  child: Center(
+                    child: Image.asset(
+                      "assets/logo.png",
+                      height: 40,
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                Flexible(
+                  flex: 4,
+                  child: Container(),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () {
+                      context.go("/bookList");
+                    },
+                    icon: const Icon(
+                      size: 40,
+                      Icons.search,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                )
               ],
             ),
-
             const SizedBox(height: 20),
-            
             Container(
               alignment: Alignment.centerLeft,
-              child: const Text(
-              "DANH MỤC CƠ BẢN",
-              style: TextStyle(
-                color: Color(0xFF4758A8),
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                fontFamily: AppTextStyles.fontFamily,
-              )
-            ),),
-
+              child: const Text("DANH MỤC CƠ BẢN",
+                  style: TextStyle(
+                    color: Color(0xFF4758A8),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    fontFamily: AppTextStyles.fontFamily,
+                  )),
+            ),
             const SizedBox(height: 10),
-
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               padding: const EdgeInsets.all(10),
-              children: [ // Sửa lỗi ở đây
-                _buildCategoryItem("Danh sách phát", Icons.shelves),
-                _buildCategoryItem("Danh sách khách hàng", Icons.people),
+              children: [
+                // Sửa lỗi ở đây
+
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách Sách", Icons.shelves),
+                  onTap: () => context.go("/bookList"),
+                ),
+
+                _buildCategoryItem(
+                    context, "Danh sách khách hàng", Icons.people),
               ],
             ),
-
             const SizedBox(height: 20),
-
             Container(
               alignment: Alignment.centerLeft,
               child: const Text(
-              "DANH SÁCH PHẦN MỀM",
-              style: TextStyle(
-                color: Color(0xFF4758A8),
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-                fontFamily: AppTextStyles.fontFamily
-              ),
+                "DANH SÁCH PHẦN MỀM",
+                style: TextStyle(
+                    color: Color(0xFF4758A8),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.0,
+                    fontFamily: AppTextStyles.fontFamily),
               ),
             ),
-
             const SizedBox(height: 10),
-
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10), 
-              children: [ // Sửa lỗi ở đây
+              padding: const EdgeInsets.all(10),
+              children: [
+                // Sửa lỗi ở đây
                 _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
                 _buildFeatureItem("Lập hoá đơn bán sách", Icons.car_rental),
-                _buildFeatureItem("Lập phiếu thu tiền", Icons.pause_presentation),
+                _buildFeatureItem(
+                    "Lập phiếu thu tiền", Icons.pause_presentation),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
               ],
             ),
@@ -116,17 +124,13 @@ class _HomePageState extends State<HomePage>{
   }
 
   // Hàm xây dựng item cho danh mục
-  Widget _buildCategoryItem(String title, IconData icon) {
+  Widget _buildCategoryItem(BuildContext context, String title, IconData icon) {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFC7B3CC),
-            Color(0xFF268AB2)
-          ]
-        ),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFC7B3CC), Color(0xFF268AB2)]),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -139,7 +143,7 @@ class _HomePageState extends State<HomePage>{
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 14,
             ),
             textAlign: TextAlign.center,
           ),
@@ -152,13 +156,9 @@ class _HomePageState extends State<HomePage>{
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFC7B3CC),
-            Color(0xFF268AB2)
-          ]
-        ),
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFC7B3CC), Color(0xFF268AB2)]),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage>{
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 14,
                 ),
                 textAlign: TextAlign.center,
               ),
