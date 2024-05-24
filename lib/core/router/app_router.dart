@@ -25,7 +25,7 @@ GoRouter goRouter(GoRouterRef ref) {
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const CreateReceiptScreen(),
+        builder: (context, state) => HoaDonBanSachScreen(),
       )
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
