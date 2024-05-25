@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shelfify/app.dart';
+import 'package:path/path.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
-import 'package:shelfify/core/router/app_router.dart';
-import 'package:shelfify/features/book/presentation/view/select_book_bottom_sheet.dart';
-import 'package:shelfify/features/book/presentation/view/select_customer_bottom_sheet.screen.dart';
-import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
 
-class CreatePurchaseReceiptScreen extends ConsumerWidget {
-  const CreatePurchaseReceiptScreen({super.key});
+class CreateReceiptScreen extends StatelessWidget {
+  const CreateReceiptScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCustomer = ref.watch(selectedCustomerStatedProvider);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -25,9 +17,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             Icons.arrow_back,
             color: AppColors.primary,
           ),
-          onPressed: () {
-            context.pop();
-          },
+          onPressed: () {},
         ),
         title: const Text(
           'Tạo phiếu thu tiền',
@@ -38,7 +28,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +38,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.lightBlue.shade100),
                       borderRadius: BorderRadius.circular(10),
@@ -57,7 +47,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         buildInfoColumn('Mã phiếu thu', 'PT0001'),
-                        buildInfoColumn('Ngày thu', "25-05-2024", true),
+                        buildInfoColumn('Ngày thu', '15-05-2023', true),
                       ],
                     ),
                   ),
@@ -74,22 +64,14 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 10),
-            TextField(
-              onTap: () {
-                showModalBottomSheet(
-                  constraints: const BoxConstraints.expand(),
-                  context: context,
-                  builder: (context) {
-                    return const SelectCustomerBottomSheet();
-                  });
-              },
+            const TextField(
               keyboardType: TextInputType.text,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w600,
               ),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
@@ -110,10 +92,10 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 10),
-            buildInfoText('Địa chỉ', selectedCustomer.address),
-            buildInfoText('Điện thoại', selectedCustomer.phoneNumber),
-            buildInfoText('Email', selectedCustomer.email),
-            buildColoredInfoText('Công nợ cũ', selectedCustomer.outstandingAmount.toString(), Colors.red),
+            buildInfoText('Địa chỉ', 'DiaChi'),
+            buildInfoText('Điện thoại', 'SoDienThoai'),
+            buildInfoText('Email', 'Email'),
+            buildColoredInfoText('Công nợ cũ', 'SoTienNo VND', Colors.red),
             buildInfoText("Số tiền thu", ""),
             const TextField(
               keyboardType: TextInputType.number,
@@ -145,9 +127,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             Container(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                  onPressed: () {
-                    context.go("/createReceiptScreen");
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -189,6 +169,12 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                 color: Colors.black,
               ),
             ),
+            if (isEditable)
+              const Icon(
+                Icons.edit,
+                size: 16,
+                color: Colors.blue,
+              ),
           ],
         ),
       ],
@@ -207,7 +193,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
           ),
           Text(
             value,
-            style: const TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
         ],
       ),

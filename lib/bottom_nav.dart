@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
   final int currentIndex;
-  final Function(int) onTap;
 
   const BottomNavigationBarWidget({
     super.key,
     required this.currentIndex,
-    required this.onTap,
   });
 
   @override
@@ -15,6 +14,25 @@ class BottomNavigationBarWidget extends StatefulWidget {
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+
+  void _onItemTapped(int index) {
+    switch (index) {
+      case 0:
+        context.go('/');
+        break;
+      case 1:
+        context.go('/category');
+        break;
+      case 2:
+        context.go('/account');
+        break;
+      case 3:
+        context.go('/settings');
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +57,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         ),
       ],
       currentIndex: widget.currentIndex,
-      onTap: widget.onTap,
+      onTap: _onItemTapped,
     );
   }
 }
