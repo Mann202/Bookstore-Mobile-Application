@@ -5,7 +5,7 @@ part 'models.freezed.dart';
 @freezed
 class Customer with _$Customer {
   const factory Customer({
-    int? customerId,
+    required int customerId,
     required String customerName,
     required String address,
     required String phoneNumber,
@@ -39,79 +39,24 @@ class DebtReport with _$DebtReport {
 @freezed
 class Invoice with _$Invoice {
   const factory Invoice({
-    int? invoiceId,
-    required Customer customer,
+    required int invoiceId,
+    required int customerId,
     required DateTime invoiceDate,
     required double totalAmount,
     required double paymentAmount,
     required double remainingAmount,
-    required List<InvoiceDetail> invoiceDetails,
   }) = _Invoice;
-
-  factory Invoice.fromMap(Map<String, dynamic> map) => Invoice(
-        invoiceId: map['MaHoaDon'] as int,
-        invoiceDate: map['NgayHoaDon'],
-        totalAmount: map['TongTien'] as double,
-        paymentAmount: map['SoTienThanhToan'] as double,
-        remainingAmount: map['SoTienConLai'] as double,
-        customer: Customer.fromMap(map['KhachHang']),
-        invoiceDetails: (map['ChiTietHoaDon'] as List)
-            .map((e) => InvoiceDetail.fromMap(e as Map<String, dynamic>))
-            .toList(),
-      );
 }
 
 @freezed
-class InvoiceDetail with _$InvoiceDetail {
-  const factory InvoiceDetail({
+class InvoiceInfo with _$InvoiceInfo {
+  const factory InvoiceInfo({
+    required int invoiceId,
+    required int id,
     required int quantity,
-    required Book book,
     required double unitPrice,
     required double totalPrice,
-  }) = _InvoiceDetail;
-
-  factory InvoiceDetail.fromMap(Map<String, dynamic> map) => InvoiceDetail(
-        quantity: map['SoLuong'] as int,
-        unitPrice: map['DonGia'] as double,
-        totalPrice: map['TongTien'] as double,
-        book: Book.fromMap(map['Sach']),
-      );
-}
-
-@freezed
-class BookPurchaseReceipt with _$BookPurchaseReceipt {
-  const factory BookPurchaseReceipt({
-    int? receiptId,
-    required DateTime purchaseDate,
-    required int totalAmount,
-    required List<BookPurchaseReceiptInfo> receipts,
-  }) = _BookPurchaseReceipt;
-
-  factory BookPurchaseReceipt.fromMap(Map<String, dynamic> map) =>
-      BookPurchaseReceipt(
-        receiptId: map['MaPhieuNhapSach'] as int,
-        purchaseDate: map['NgayNhap'],
-        totalAmount: map['TongTien'] as int,
-        receipts: (map['ChiTietPhieuNhap'] as List)
-            .map((e) =>
-                BookPurchaseReceiptInfo.fromMap(e as Map<String, dynamic>))
-            .toList(),
-      );
-}
-
-@freezed
-class BookPurchaseReceiptInfo with _$BookPurchaseReceiptInfo {
-  const factory BookPurchaseReceiptInfo({
-    required Book book,
-    required int quantity,
-    required double purchasePrice,
-  }) = _BookPurchaseReceiptInfo;
-
-  factory BookPurchaseReceiptInfo.fromMap(Map<String, dynamic> map) =>
-      BookPurchaseReceiptInfo(
-          book: Book.fromMap(map['Sach']),
-          quantity: map['SoLuong'],
-          purchasePrice: map['DonGiaNhap']);
+  }) = _InvoiceInfo;
 }
 
 @freezed
@@ -142,47 +87,6 @@ class Book with _$Book {
 }
 
 @freezed
-class Category with _$Category {
-  const factory Category({
-    int? categoryId,
-    required String categoryName,
-  }) = _Category;
-
-  factory Category.fromMap(Map<String, dynamic> map) => Category(
-        categoryId: map['MaTheLoai'] as int,
-        categoryName: map['TenTheLoai'] as String,
-      );
-}
-
-@freezed
-class BookTitle with _$BookTitle {
-  const factory BookTitle({
-    int? bookTitleId,
-    int? categoryId,
-    required String bookTitle,
-  }) = _BookTitle;
-
-  factory BookTitle.fromMap(Map<String, dynamic> map) => BookTitle(
-        bookTitleId: map['MaDauSach'] as int,
-        categoryId: map['MaTheLoai'] as int,
-        bookTitle: map['TenDauSach'] as String,
-      );
-}
-
-@freezed
-class Author with _$Author {
-  const factory Author({
-    int? authorId,
-    required String authorName,
-  }) = _Author;
-
-  factory Author.fromMap(Map<String, dynamic> map) => Author(
-        authorId: map['MaTacGia'] as int,
-        authorName: map['TenTacGia'] as String,
-      );
-}
-
-@freezed
 class InventoryReport with _$InventoryReport {
   const factory InventoryReport({
     required int month,
@@ -192,4 +96,56 @@ class InventoryReport with _$InventoryReport {
     required int quantityChange,
     required int endingQuantity,
   }) = _InventoryReport;
+}
+
+@freezed
+class BookPurchaseReceipt with _$BookPurchaseReceipt {
+  const factory BookPurchaseReceipt({
+    required int receiptId,
+    required DateTime purchaseDate,
+    required int totalAmount,
+  }) = _BookPurchaseReceipt;
+}
+
+@freezed
+class BookPurchaseReceiptInfo with _$BookPurchaseReceiptInfo {
+  const factory BookPurchaseReceiptInfo({
+    required int receiptId,
+    required int id,
+    required int quantity,
+    required double purchasePrice,
+    required double totalPrice,
+  }) = _BookPurchaseReceiptInfo;
+}
+
+@freezed
+class BookCategory with _$BookCategory {
+  const factory BookCategory({
+    required int categoryId,
+    required String categoryName,
+  }) = _BookCategory;
+}
+
+@freezed
+class Genre with _$Genre {
+  const factory Genre({
+    required String genreId,
+    required String genreName,
+  }) = _Genre;
+}
+
+@freezed
+class AuthorInfo with _$AuthorInfo {
+  const factory AuthorInfo({
+    required int id,
+    required int authorId,
+  }) = _AuthorInfo;
+}
+
+@freezed
+class Author with _$Author {
+  const factory Author({
+    required int authorId,
+    required String authorName,
+  }) = _Author;
 }
