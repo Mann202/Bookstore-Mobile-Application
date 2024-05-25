@@ -72,7 +72,7 @@ class SearchCustomer extends ConsumerWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(books[index].category.toString(), //Số điện thoại
+                        Text(books[index].categoryId.toString(), //Số điện thoại
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,

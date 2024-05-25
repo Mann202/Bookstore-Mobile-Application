@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'models.freezed.dart';
 
 @freezed
@@ -11,15 +12,6 @@ class Customer with _$Customer {
     required String email,
     required double outstandingAmount,
   }) = _Customer;
-
-  factory Customer.fromMap(Map<String, dynamic> map) => Customer(
-        customerId: map['MaKhachHang'] as int,
-        customerName: map['TenKhachHang'] as String,
-        address: map['DiaChi'] as String,
-        phoneNumber: map['SoDienThoai'] as String,
-        email: map['Email'] as String,
-        outstandingAmount: map['SoTienNo'] as double,
-      );
 }
 
 @freezed
@@ -30,13 +22,6 @@ class PaymentReceipt with _$PaymentReceipt {
     required double amountReceived,
     required DateTime receiptDate,
   }) = _PaymentReceipt;
-
-  factory PaymentReceipt.fromMap(Map<String, dynamic> map) => PaymentReceipt(
-        receiptId: map['MaPhieuThuTien'] as int,
-        customerId: map['MaKhachHang'] as int,
-        amountReceived: map['SoTienThu'] as double,
-        receiptDate: DateTime.parse(map['NgayThu']),
-      );
 }
 
 @freezed
@@ -49,15 +34,6 @@ class DebtReport with _$DebtReport {
     required double endingDebt,
     required double debtChange,
   }) = _DebtReport;
-
-  factory DebtReport.fromMap(Map<String, dynamic> map) => DebtReport(
-        customerId: map['MaKhachHang'] as String,
-        month: map['Thang'] as int,
-        year: map['Nam'] as int,
-        startingDebt: map['NoDau'] as double,
-        debtChange: map['NoPhatSinh'] as double,
-        endingDebt: map['NoCuoi'] as double,
-      );
 }
 
 @freezed
@@ -74,11 +50,14 @@ class Invoice with _$Invoice {
 
   factory Invoice.fromMap(Map<String, dynamic> map) => Invoice(
         invoiceId: map['MaHoaDon'] as int,
-        customerId: map['MaKhachHang'] as int,
         invoiceDate: map['NgayHoaDon'],
         totalAmount: map['TongTien'] as double,
         paymentAmount: map['SoTienThanhToan'] as double,
         remainingAmount: map['SoTienConLai'] as double,
+        customer: Customer.fromMap(map['KhachHang']),
+        invoiceDetails: (map['ChiTietHoaDon'] as List)
+            .map((e) => InvoiceDetail.fromMap(e as Map<String, dynamic>))
+            .toList(),
       );
 }
 
@@ -89,14 +68,13 @@ class InvoiceDetail with _$InvoiceDetail {
     required Book book,
     required double unitPrice,
     required double totalPrice,
-  }) = _InvoiceInfo;
+  }) = _InvoiceDetail;
 
-  factory InvoiceInfo.fromMap(Map<String, dynamic> map) => InvoiceInfo(
-        invoiceId: map['MaHoaDon'] as int,
-        id: map['MaSach'] as int,
+  factory InvoiceDetail.fromMap(Map<String, dynamic> map) => InvoiceDetail(
         quantity: map['SoLuong'] as int,
         unitPrice: map['DonGia'] as double,
         totalPrice: map['TongTien'] as double,
+        book: Book.fromMap(map['Sach']),
       );
 }
 
@@ -214,13 +192,4 @@ class InventoryReport with _$InventoryReport {
     required int quantityChange,
     required int endingQuantity,
   }) = _InventoryReport;
-
-  factory InventoryReport.fromMap(Map<String, dynamic> map) => InventoryReport(
-        month: map['Thang'] as int,
-        year: map['Nam'] as int,
-        id: map['MaSach'] as int,
-        startingQuantity: map['TonDau'] as int,
-        quantityChange: map['PhatSinh'] as int,
-        endingQuantity: map['TonCuoi'] as int,
-      );
 }

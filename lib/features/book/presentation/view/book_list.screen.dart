@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
+import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 import 'package:shelfify/features/book/presentation/view/book_detail.screen.dart';
@@ -65,27 +66,9 @@ class BookListScreen extends ConsumerWidget {
                     child: BookInfoWidget(
                       book: books[index],
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(books[index].getCategory(),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: AppTextStyles.fontFamily)),
-                        Text('Thể loại: ${books[index]}',
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: AppTextStyles.fontFamily)),
-                      ],
-                    ),
-                    trailing: Text('Tồn kho: ${books[index].quantityInStock}',
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: AppTextStyles.fontFamily)),
-                  ));
+                  );
+                },
+              );
             },
           );
         },

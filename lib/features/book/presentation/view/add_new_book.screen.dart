@@ -9,6 +9,9 @@ class AddNewBookScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bookListState = ref.watch(bookListStateNotifierProvider);
+    final TextEditingController tenSachController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -46,7 +49,7 @@ class AddNewBookScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              _buildTextField(),
+              _buildTextField(tenSachController),
               const SizedBox(height: 20),
               const Text(
                 "Tác Giả",
@@ -75,7 +78,12 @@ class AddNewBookScreen extends ConsumerWidget {
                   backgroundColor: const Color(0xFF4758A8),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                    String tenSach = tenSachController.text;
+                    //Book book = Book(id: id, categoryId: categoryId, publisher: publisher, publicationYear: publicationYear, quantityInStock: quantityInStock, sellingPrice: sellingPrice, purchasePrice: purchasePrice)
+                    
+                    //ref.read(bookListStateNotifierProvider.notifier).createBook(book);
+                  },
                 child: const Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Text(
@@ -95,8 +103,9 @@ class AddNewBookScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildTextField() {
+  Widget _buildTextField(TextEditingController controller) {
     return TextField(
+      controller: controller,
       style: const TextStyle(
         color: Colors.black,
         fontSize: 20.0,
