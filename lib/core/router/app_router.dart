@@ -4,6 +4,7 @@ import "package:shelfify/features/book/presentation/view/book_list.screen.dart";
 import "package:shelfify/features/book/presentation/view/search_book_screen.dart";
 import "package:shelfify/features/customer/presentation/view/list_customer_screen.dart";
 import "package:shelfify/features/customer/presentation/view/search_customer_screen.dart";
+import "package:shelfify/features/home/presentation/view/caterogy_screen.dart";
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
 import "package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
@@ -47,7 +48,7 @@ GoRouter goRouter(GoRouterRef ref) {
       ),
       GoRoute(
         path: "/category",
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => CaterogyScreen(),
         routes: const [
         ],
       ),

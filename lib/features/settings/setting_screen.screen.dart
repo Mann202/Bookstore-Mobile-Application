@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
+import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Thêm dòng này
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sharedPreferencesStateNotifier = localStoreProvider;
+    TextEditingController soLuongNhapController = TextEditingController();
+    TextEditingController soLuongTonKhoController = TextEditingController();
+    TextEditingController soLuongTonToiThieuController =
+        TextEditingController();
+    TextEditingController tiLeTinhDonGiaController = TextEditingController();
+    TextEditingController soTienNoController = TextEditingController();
+
+    // Thêm hàm async để đọc giá trị từ SharedPreferences
+    void readSharedPreferences() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      soLuongNhapController.text = prefs.getString("soLuongNhapToiThieu") ?? '';
+      soLuongTonKhoController.text = prefs.getString("soLuongTonKhoToiDa") ?? '';
+      soLuongTonToiThieuController.text = prefs.getString("soLuongTonToiThieuSauBan") ?? '';
+      tiLeTinhDonGiaController.text = prefs.getString("tiLeTinhDonGiaBan") ?? '';
+      soTienNoController.text = prefs.getString("soTienNoToiDa") ?? '';
+    }
+
+    // Gọi hàm đọc SharedPreferences khi màn hình được build
+    readSharedPreferences();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -35,16 +59,16 @@ class SettingsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildTextFieldSection(
-                'Số lượng nhập tối thiểu', '150', TextInputType.number),
-            buildTextFieldSection(
-                'Số lượng tồn kho tối đa', '300', TextInputType.number),
-            buildTextFieldSection(
-                'Số lượng tồn tối thiểu sau bán', '20', TextInputType.number),
-            buildTextFieldSection(
-                'Tỉ lệ tính đơn giá bán', '105%', TextInputType.number),
-            buildTextFieldSection(
-                'Số tiền nợ tối đa', '1.000.000 VND', TextInputType.number),
+            buildTextFieldSection('Số lượng nhập tối thiểu', '150',
+                TextInputType.number, soLuongNhapController),
+            buildTextFieldSection('Số lượng tồn kho tối đa', '300',
+                TextInputType.number, soLuongTonKhoController),
+            buildTextFieldSection('Số lượng tồn tối thiểu sau bán', '20',
+                TextInputType.number, soLuongTonToiThieuController),
+            buildTextFieldSection('Tỉ lệ tính đơn giá bán', '105%',
+                TextInputType.number, tiLeTinhDonGiaController),
+            buildTextFieldSection('Số tiền nợ tối đa', '1.000.000 VND',
+                TextInputType.number, soTienNoController),
             const Text(
               'Kiểm tra quy định',
               style: TextStyle(
@@ -71,7 +95,20 @@ class SettingsScreen extends StatelessWidget {
             Container(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.watch(sharedPreferencesStateNotifier).setString(
+                        "soLuongNhapToiThieu", soLuongNhapController.text);
+                    ref.watch(sharedPreferencesStateNotifier).setString(
+                        "soLuongTonKhoToiDa", soLuongTonKhoController.text);
+                    ref.watch(sharedPreferencesStateNotifier).setString(
+                        "soLuongTonToiThieuSauBan",
+                        soLuongTonToiThieuController.text);
+                    ref.watch(sharedPreferencesStateNotifier).setString(
+                        "tiLeTinhDonGiaBan", tiLeTinhDonGiaController.text);
+                    ref
+                        .watch(sharedPreferencesStateNotifier)
+                        .setString("soTienNoToiDa", soTienNoController.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -91,13 +128,15 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       )),
-      bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 3,),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        currentIndex: 3,
+      ),
     );
   }
 }
 
-Widget buildTextFieldSection(
-    String labelText, String hintText, TextInputType inputType) {
+Widget buildTextFieldSection(String labelText, String hintText,
+    TextInputType inputType, TextEditingController controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -111,6 +150,7 @@ Widget buildTextFieldSection(
       ),
       const SizedBox(height: 10),
       TextField(
+        controller: controller,
         keyboardType: inputType,
         style: const TextStyle(
           color: Colors.black,
