@@ -46,7 +46,7 @@ class BookInfoWidget extends StatelessWidget {
                       fontFamily: AppTextStyles.fontFamily)),
             ],
           ),
-          trailing: Text('Tồn kho: ${book.quantityInStock}',
+          trailing: Text('Năm xuất bản: ${book.publicationYear.toString()}',
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 15,

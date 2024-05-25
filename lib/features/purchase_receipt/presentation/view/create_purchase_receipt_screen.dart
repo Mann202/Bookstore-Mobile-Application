@@ -91,24 +91,25 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                 fontSize: 16.0,
                 fontWeight: FontWeight.w600,
               ),
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                enabledBorder: OutlineInputBorder(
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(15.0),
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                fillColor: Color.fromARGB(255, 255, 255, 255),
-                hintText: 'TenKhachHang',
-                hintStyle: TextStyle(
+                fillColor: const Color.fromARGB(255, 255, 255, 255),
+                hintText: selectedCustomer.customerName,
+                hintStyle: const TextStyle(
                   color: Color.fromARGB(255, 172, 172, 172),
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600,
                 ),
-                suffixIcon: Icon(Icons.search, size: 30, color: Colors.grey),
+                suffixIcon:
+                    const Icon(Icons.search, size: 30, color: Colors.grey),
               ),
             ),
             const SizedBox(height: 10),
@@ -150,9 +151,31 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.read(soTienThuStatedProvider.notifier).state =
-                        tienThuController.text;
-                    context.go("/printReceiptScreen");
+                    if (double.parse(tienThuController.text) >
+                        selectedCustomer.outstandingAmount) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Lỗi'),
+                            content: const Text(
+                                'Số tiền thu vượt quá số tiền nợ của khách hàng. Vui lòng nhập lại.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      ref.read(soTienThuStatedProvider.notifier).state =
+                      tienThuController.text;
+                      context.go("/printReceiptScreen");
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
