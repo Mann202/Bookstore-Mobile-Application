@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
@@ -123,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 0,),
     );
   }
 

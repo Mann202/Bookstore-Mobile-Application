@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -90,6 +91,7 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       )),
+      bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 3,),
     );
   }
 }

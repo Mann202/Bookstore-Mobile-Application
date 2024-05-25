@@ -7,6 +7,7 @@ import "package:shelfify/features/customer/presentation/view/search_customer_scr
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
 import "package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
+import "package:shelfify/features/settings/acconut_screen.screen.dart";
 import "package:shelfify/features/settings/setting_screen.screen.dart";
 
 import "not_found_screen.dart";
@@ -52,7 +53,7 @@ GoRouter goRouter(GoRouterRef ref) {
       ),
       GoRoute(
         path: "/account",
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const AccountsSreen(),
         routes: const [
         ],
       ),
