@@ -12,7 +12,7 @@ import 'package:shelfify/features/book/presentation/providers/selected_books_pro
 import 'package:shelfify/features/invoice/presentation/view/general_information.dart';
 
 final selectedBookStateProvider =
-    StateProvider.autoDispose<List<Book>>((ref) => []);
+    StateProvider<List<Book>>((ref) => []);
 
 class SelectBookBottomSheet extends ConsumerWidget {
   const SelectBookBottomSheet({super.key});

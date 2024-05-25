@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/core/models/models.dart';
+import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
 import 'package:shelfify/features/book/presentation/view/select_book_bottom_sheet.dart';
 import 'package:shelfify/features/book/presentation/view/select_customer_bottom_sheet.screen.dart';
 import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
@@ -48,7 +49,7 @@ class PhieuNhapSach extends ConsumerWidget {
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Mã hóa đơn",
+                        Text("Mã phiếu nhập",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -229,7 +230,32 @@ class PhieuNhapSach extends ConsumerWidget {
                       TextField(
                         style: AppTextStyles.s2,
                         keyboardType: TextInputType.number,
-                        onSubmitted: (value) {
+                        onSubmitted: (value) async {
+                          final soLuongNhapToiThieu = await ref
+                              .watch(localStoreProvider)
+                              .getString("soLuongNhapToiThieu");
+                          if (int.parse(value) <
+                              int.parse(soLuongNhapToiThieu!)) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Cảnh báo số lượng nhập"),
+                                  content: const Text(
+                                      "Số lượng sản phẩm nhập không dưới số lượng tối thiểu đã cài đặt."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); 
+                                      },
+                                      child: const Text("Đóng"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                           ref.read(selectedDetailsProvider.notifier).state = ref
                               .read(selectedDetailsProvider.notifier)
                               .state
