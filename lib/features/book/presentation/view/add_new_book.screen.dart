@@ -16,11 +16,21 @@ class AddNewBookScreen extends ConsumerWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Thêm sách', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Color(0xFF4758A8)),),
+        title: const Text(
+          'Thêm sách',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Color(0xFF4758A8)),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF4758A8), size: 35,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color(0xFF4758A8),
+            size: 35,
+          ),
           onPressed: () {
-            Navigator.pop(context); 
+            Navigator.pop(context);
           },
         ),
       ),
@@ -63,25 +73,29 @@ class AddNewBookScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               _buildDropDown(context, "Chọn thể loại"),
               const SizedBox(height: 30),
-              
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4758A8),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                  onPressed: () {
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4758A8),
+                  minimumSize: const Size(double.infinity, 50),
+                ),
+                onPressed: () {
                     String tenSach = tenSachController.text;
                     //Book book = Book(id: id, categoryId: categoryId, publisher: publisher, publicationYear: publicationYear, quantityInStock: quantityInStock, sellingPrice: sellingPrice, purchasePrice: purchasePrice)
                     
                     //ref.read(bookListStateNotifierProvider.notifier).createBook(book);
                   },
-                  child: const Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(15.0),
                   child: Text(
                     'Lưu',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white, fontFamily: AppTextStyles.fontFamily),
-                    ),
-                  ),)
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontFamily: AppTextStyles.fontFamily),
+                  ),
+                ),
+              )
             ],
           ),
         ),
