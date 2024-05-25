@@ -27,6 +27,15 @@ class CreateInvoiceScreen extends ConsumerWidget {
     return "${today.day}-${today.month}-${today.year}";
   }
 
+  String getTotal(List<InvoiceDetail> details) {
+    if (details.isEmpty) return '0';
+
+    return details
+        .map((detail) => detail.totalPrice)
+        .reduce((a, b) => a + b)
+        .toString();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final details = ref.watch(selectedDetailsProvider);
@@ -110,11 +119,26 @@ class CreateInvoiceScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Tổng tiền: ${details.map((detail) => detail.totalPrice).reduce((a, b) => a + b)}',
+                  'Tổng tiền: ${getTotal(details)}',
                   style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                                title: const Text('Thông báo'),
+                                content: const Text(
+                                    'Hoá đơn đã được tạo thành công'),
+                                actions: [
+                                  TextButton(
+                                      child: const Text('OK'),
+                                      onPressed: () {
+                                        context.pop();
+                                        context.go("/");
+                                      })
+                                ]));
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1F46A6),
                     padding: const EdgeInsets.symmetric(

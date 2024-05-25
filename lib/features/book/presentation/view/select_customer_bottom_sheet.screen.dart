@@ -56,15 +56,15 @@ class SelectCustomerBottomSheet extends ConsumerWidget {
                         itemCount: customers.length,
                         itemBuilder: (context, index) {
                           final customer = customers[index];
-                          return InkWell(onTap: () {
-                            
-                          }, child: Consumer(
-                            builder: (BuildContext context, WidgetRef ref,
-                                Widget? child) {
-                              final selectedBook =
-                                  ref.watch(selectedBookStateProvider);
-                              final isSelected = selectedBook.contains(customer);
-                              return Card(
+                          return InkWell(
+                              onTap: () {
+                                ref
+                                    .read(
+                                        selectedCustomerStatedProvider.notifier)
+                                    .state = customer;
+                                context.pop();
+                              },
+                              child: Card(
                                   color: Colors.white,
                                   margin: const EdgeInsets.symmetric(
                                       vertical: 8, horizontal: 16),
@@ -73,9 +73,7 @@ class SelectCustomerBottomSheet extends ConsumerWidget {
                                   ),
                                   child: ListTile(
                                     contentPadding: const EdgeInsets.all(16),
-                                    tileColor: (isSelected
-                                        ? AppColors.primary
-                                        : Colors.grey[200]),
+                                    tileColor: AppColors.white20,
                                     title: Text(
                                       customer.customerName,
                                       style: const TextStyle(
@@ -102,16 +100,13 @@ class SelectCustomerBottomSheet extends ConsumerWidget {
                                                     AppTextStyles.fontFamily)),
                                       ],
                                     ),
-                                    trailing: Text(
-                                        'Email: ${customer.email}',
+                                    trailing: Text('Email: ${customer.email}',
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
                                             fontFamily:
                                                 AppTextStyles.fontFamily)),
-                                  ));
-                            },
-                          ));
+                                  )));
                         },
                       ),
                     )

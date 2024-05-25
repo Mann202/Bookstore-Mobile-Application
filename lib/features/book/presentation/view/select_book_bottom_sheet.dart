@@ -9,6 +9,7 @@ import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 import 'package:shelfify/features/book/presentation/providers/selected_books_provider.dart';
+import 'package:shelfify/features/invoice/presentation/view/general_information.dart';
 
 final selectedBookStateProvider = StateProvider<List<Book>>((ref) => []);
 
@@ -71,6 +72,15 @@ class SelectBookBottomSheet extends ConsumerWidget {
                         }
                         ref.read(selectedBookStateProvider.notifier).state =
                             selectedBook;
+                        ref.read(selectedDetailsProvider.notifier).state =
+                            selectedBook
+                                .map((book) => InvoiceDetail(
+                                      unitPrice: book.sellingPrice,
+                                      quantity: 0,
+                                      totalPrice: 0,
+                                      book: book,
+                                    ))
+                                .toList();
                       },
                       child: Card(
                         color: Colors.white,

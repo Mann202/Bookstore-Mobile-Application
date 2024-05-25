@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/features/book/presentation/view/select_customer_bottom_sheet.screen.dart';
+import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
 import 'package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart';
 
 class CustomerInformation extends ConsumerWidget {
@@ -8,6 +9,8 @@ class CustomerInformation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final customer = ref.watch(selectedCustomerStatedProvider);
+
     return Form(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -74,14 +77,16 @@ class CustomerInformation extends ConsumerWidget {
               style: const TextStyle(fontSize: 20, color: Colors.black),
               onTap: () {
                 showModalBottomSheet(
-                  constraints: const BoxConstraints.expand(),
-                  context: context,
-                  builder: (context) {
-                    return const SelectCustomerBottomSheet();
-                  });
+                    constraints: const BoxConstraints.expand(),
+                    context: context,
+                    builder: (context) {
+                      return const SelectCustomerBottomSheet();
+                    });
               },
               decoration: InputDecoration(
-                hintText: 'TenKhachHang',
+                hintText: customer.customerName == ""
+                    ? "Ten Khach Hang"
+                    : customer.customerName,
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 20),
                 filled: true,
                 prefixIcon: const Icon(Icons.search),
@@ -114,8 +119,10 @@ class CustomerInformation extends ConsumerWidget {
             const SizedBox(
               height: 10,
             ),
-            _buildDetailRow("Công nợ cũ", ""),
-            _buildDetailRow("Tổng tiền hoá đơn", ""),
+            _buildDetailRow(
+              "Công nợ cũ",
+              customer.outstandingAmount.toString(),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -164,24 +171,6 @@ class CustomerInformation extends ConsumerWidget {
             const SizedBox(
               height: 15,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1F46A6),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 25),
-                  ),
-                  child: const Text('Thanh toán',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800)),
-                ),
-              ],
-            )
           ],
         ),
       ),
