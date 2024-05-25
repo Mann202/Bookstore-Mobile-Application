@@ -1,96 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shelfify/bottom_nav.dart';
-import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
-
-class CaterogyScreen extends StatefulWidget {
-  @override
-  _CaterogyScreenState createState() => _CaterogyScreenState();
-}
-
-class _CaterogyScreenState extends State<CaterogyScreen>{
-
-  int _currentIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              title: Image.asset("assets/logo.png", height: 40),
-              actions: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search, ),
-                      hintText: "Tra cứu sách",
-                      hintStyle: const TextStyle(fontFamily: AppTextStyles.fontFamily, fontSize: 20.0, color: Colors.black),
-                      prefixIconColor: const Color(0xFF4758A8),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-              ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          'DANH MỤC',
+          style: TextStyle(
+            color: Colors.blue.shade900,
+            fontSize: 22.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 16.0,
+          children: const <Widget>[
+            MenuButton(
+              icon: Icons.menu_book_rounded,
+              label: 'Danh sách \nSách',
+              path: '/bookList',
             ),
-            
-            Container(
-              alignment: Alignment.centerLeft,
-              child: const Text(
-              "DANH MỤC",
-              style: TextStyle(
-                color: Color(0xFF4758A8),
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                fontFamily: AppTextStyles.fontFamily,
-              )
-            ),),
-
-            const SizedBox(height: 10),
-
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10),
-              children: [ 
-                _buildCategoryItem("Danh sách sách", Icons.shelves),
-                _buildCategoryItem("Danh sách khách hàng", Icons.people),
-              ],
-            ),
-
-            const SizedBox(height: 10),
-
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10), 
-              children: [
-                _buildFeatureItem("Phiếu nhập sách", Icons.book),
-                _buildFeatureItem("Danh sách khách hàng", Icons.people),
-                _buildFeatureItem("Danh sách phiếu nhập", Icons.store),
-                _buildFeatureItem("Danh sách hoá đơn", Icons.car_rental),
-              ],
+            MenuButton(
+              icon: Icons.people_alt_rounded,
+              label: 'Danh sách \nKhách hàng',
+              path: '/listCustomer',
             ),
           ],
         ),
@@ -98,72 +43,58 @@ class _CaterogyScreenState extends State<CaterogyScreen>{
       bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 1,),
     );
   }
+}
 
-  Widget _buildCategoryItem(String title, IconData icon) {
+class MenuButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String path;
+
+  const MenuButton(
+      {super.key, required this.icon, required this.label, required this.path});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 20, top: 25),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
         gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
           colors: [
-            Colors.orange,
-            Colors.blue
-          ]
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 48, color: Colors.white),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 16,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeatureItem(String title, IconData icon) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+            Color.fromARGB(255, 212, 103, 30),
+            Color.fromARGB(255, 66, 85, 155)
+          ],
           begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.orange,
-            Colors.blue
-          ]
+          end: Alignment.bottomLeft,
         ),
-        borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 48, color: Colors.white),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
+      child: InkWell(
+        onTap: () {
+          context.go(path);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              icon,
+              size: 50,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              label,
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontSize: 22,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

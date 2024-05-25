@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 
 class CreateReceiptScreen extends StatelessWidget {
