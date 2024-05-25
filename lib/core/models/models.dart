@@ -62,10 +62,8 @@ class InvoiceInfo with _$InvoiceInfo {
 @freezed
 class Book with _$Book {
   const factory Book({
-    int? id,
-    required Author author,
-    required BookTitle title,
-    required Category category,
+    required int id,
+    required int categoryId,
     required String publisher,
     required int publicationYear,
     required int quantityInStock,
@@ -73,17 +71,17 @@ class Book with _$Book {
     required double purchasePrice,
   }) = _Book;
 
-  factory Book.fromMap(Map<String, dynamic> map) => Book(
-        id: map['MaSach'] as int,
-        category: Category.fromMap(map['TheLoai'] as Map<String, dynamic>),
-        title: BookTitle.fromMap(map['DauSach'] as Map<String, dynamic>),
-        author: Author.fromMap(map['TacGia'] as Map<String, dynamic>),
-        publisher: map['NhaXuatBan'] as String,
-        publicationYear: map['NamXuatBan'] as int,
-        quantityInStock: map['SoLuongTon'] as int,
-        sellingPrice: map['DonGiaBan'] as double,
-        purchasePrice: map['DonGiaNhap'] as double,
-      );
+  factory Book.fromMap(Map<String, dynamic> map) {
+    return Book(
+      id: map['MaSach'] as int,
+      categoryId: map['categoryId'] as int,
+      publisher: map['publisher'] as String,
+      publicationYear: map['publicationYear'] as int,
+      quantityInStock: map['quantityInStock'] as int,
+      sellingPrice: map['sellingPrice'] as double,
+      purchasePrice: map['purchasePrice'] as double,
+    );
+  }
 }
 
 @freezed
