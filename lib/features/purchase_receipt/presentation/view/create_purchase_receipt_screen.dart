@@ -17,7 +17,6 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCustomer = ref.watch(selectedCustomerStatedProvider);
 
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,7 +28,6 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             color: AppColors.primary,
           ),
           onPressed: () {
-
             context.pop();
           },
         ),
@@ -81,11 +79,11 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             TextField(
               onTap: () {
                 showModalBottomSheet(
-                  constraints: const BoxConstraints.expand(),
-                  context: context,
-                  builder: (context) {
-                    return const SelectCustomerBottomSheet();
-                  });
+                    constraints: const BoxConstraints.expand(),
+                    context: context,
+                    builder: (context) {
+                      return const SelectCustomerBottomSheet();
+                    });
               },
               keyboardType: TextInputType.text,
               style: const TextStyle(
@@ -117,9 +115,10 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             buildInfoText('Địa chỉ', selectedCustomer.address),
             buildInfoText('Điện thoại', selectedCustomer.phoneNumber),
             buildInfoText('Email', selectedCustomer.email),
-            buildColoredInfoText('Công nợ cũ', selectedCustomer.outstandingAmount.toString(), Colors.red),
+            buildColoredInfoText('Công nợ cũ',
+                selectedCustomer.outstandingAmount.toString(), Colors.red),
             buildInfoText("Số tiền thu", ""),
-             TextField(
+            TextField(
               controller: tienThuController,
               keyboardType: TextInputType.number,
               style: const TextStyle(
@@ -151,7 +150,8 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    ref.read(soTienThuStatedProvider.notifier).state = tienThuController.text;
+                    ref.read(soTienThuStatedProvider.notifier).state =
+                        tienThuController.text;
                     context.go("/printReceiptScreen");
                   },
                   style: ElevatedButton.styleFrom(

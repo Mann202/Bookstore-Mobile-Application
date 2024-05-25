@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
 import 'package:shelfify/features/purchase_receipt/presentation/providers/purchase_receipt_provider.dart';
@@ -24,7 +25,9 @@ class PrintReceiptScreen extends ConsumerWidget {
             Icons.arrow_back,
             color: AppColors.primary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            context.pop();
+          },
         ),
         title: const Text(
           'Xem phiếu thu tiền',

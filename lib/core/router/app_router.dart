@@ -9,6 +9,7 @@ import "package:shelfify/features/home/presentation/view/caterogy_screen.dart";
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
 import "package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart";
 import "package:shelfify/features/invoice/presentation/view/create_recipt.dart";
+import "package:shelfify/features/purchase_receipt/presentation/view/create_phieu_nhap_sach.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
 import "package:shelfify/features/settings/acconut_screen.screen.dart";
 import "package:shelfify/features/settings/setting_screen.screen.dart";
@@ -47,28 +48,27 @@ GoRouter goRouter(GoRouterRef ref) {
             builder: (context, state) => const CreateInvoiceScreen(),
           ),
           GoRoute(
-            path: "printReceiptScreen",
-            builder: (context, state) => const PrintReceiptScreen()
-            )
+              path: "printReceiptScreen",
+              builder: (context, state) => const PrintReceiptScreen()),
+          GoRoute(
+              path: "phieuNhapSach",
+              builder: (context, state) => const PhieuNhapSach()),
         ],
       ),
       GoRoute(
         path: "/category",
         builder: (context, state) => CaterogyScreen(),
-        routes: const [
-        ],
+        routes: const [],
       ),
       GoRoute(
         path: "/account",
         builder: (context, state) => const AccountsSreen(),
-        routes: const [
-        ],
+        routes: const [],
       ),
       GoRoute(
         path: "/settings",
         builder: (context, state) => const SettingsScreen(),
-        routes: const [
-        ],
+        routes: const [],
       ),
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),

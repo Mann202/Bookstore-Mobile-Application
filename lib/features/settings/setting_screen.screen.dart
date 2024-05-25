@@ -20,12 +20,17 @@ class SettingsScreen extends ConsumerWidget {
 
     // Thêm hàm async để đọc giá trị từ SharedPreferences
     void readSharedPreferences() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      soLuongNhapController.text = prefs.getString("soLuongNhapToiThieu") ?? '';
-      soLuongTonKhoController.text = prefs.getString("soLuongTonKhoToiDa") ?? '';
-      soLuongTonToiThieuController.text = prefs.getString("soLuongTonToiThieuSauBan") ?? '';
-      tiLeTinhDonGiaController.text = prefs.getString("tiLeTinhDonGiaBan") ?? '';
-      soTienNoController.text = prefs.getString("soTienNoToiDa") ?? '';
+      final localStorage = ref.watch(localStoreProvider);
+      soLuongNhapController.text =
+          await localStorage.getString("soLuongNhapToiThieu") ?? '';
+      soLuongTonKhoController.text =
+          await localStorage.getString("soLuongTonKhoToiDa") ?? '';
+      soLuongTonToiThieuController.text =
+          await localStorage.getString("soLuongTonToiThieuSauBan") ?? '';
+      tiLeTinhDonGiaController.text =
+          await localStorage.getString("tiLeTinhDonGiaBan") ?? '';
+      soTienNoController.text =
+          await localStorage.getString("soTienNoToiDa") ?? '';
     }
 
     // Gọi hàm đọc SharedPreferences khi màn hình được build
@@ -95,18 +100,18 @@ class SettingsScreen extends ConsumerWidget {
             Container(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                  onPressed: () {
-                    ref.watch(sharedPreferencesStateNotifier).setString(
+                  onPressed: () async {
+                    await ref.watch(localStoreProvider).setString(
                         "soLuongNhapToiThieu", soLuongNhapController.text);
-                    ref.watch(sharedPreferencesStateNotifier).setString(
+                    await ref.watch(localStoreProvider).setString(
                         "soLuongTonKhoToiDa", soLuongTonKhoController.text);
-                    ref.watch(sharedPreferencesStateNotifier).setString(
+                    await ref.watch(localStoreProvider).setString(
                         "soLuongTonToiThieuSauBan",
                         soLuongTonToiThieuController.text);
-                    ref.watch(sharedPreferencesStateNotifier).setString(
+                    await ref.watch(localStoreProvider).setString(
                         "tiLeTinhDonGiaBan", tiLeTinhDonGiaController.text);
-                    ref
-                        .watch(sharedPreferencesStateNotifier)
+                    await ref
+                        .watch(localStoreProvider)
                         .setString("soTienNoToiDa", soTienNoController.text);
                   },
                   style: ElevatedButton.styleFrom(

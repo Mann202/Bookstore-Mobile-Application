@@ -5,7 +5,7 @@ import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/features/book/presentation/view/select_book_bottom_sheet.dart';
 import 'package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart';
 
-final selectedDetailsProvider = StateProvider<List<InvoiceDetail>>((ref) => []);
+final selectedDetailsProvider = StateProvider.autoDispose<List<InvoiceDetail>>((ref) => []);
 
 class GeneralInformation extends ConsumerWidget {
   const GeneralInformation({super.key});
