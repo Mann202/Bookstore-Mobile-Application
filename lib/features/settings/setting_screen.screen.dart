@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Thêm dòng này
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelfify/features/settings/setting_provide.dart'; // Thêm dòng này
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -11,6 +12,7 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sharedPreferencesStateNotifier = localStoreProvider;
+
     TextEditingController soLuongNhapController = TextEditingController();
     TextEditingController soLuongTonKhoController = TextEditingController();
     TextEditingController soLuongTonToiThieuController =
@@ -88,9 +90,23 @@ class SettingsScreen extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (ref.watch(settingCheckBoxStatedProvider)) {
+                    ref.read(settingCheckBoxStatedProvider.notifier).state =
+                        false;
+                  } else {
+                    ref.read(settingCheckBoxStatedProvider.notifier).state =
+                        true;
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: ref.read(settingCheckBoxStatedProvider)
+                      ? MaterialStateProperty.all(Color.fromARGB(255, 116, 174, 245))
+                      : MaterialStateProperty.all(Color.fromARGB(255, 180, 176, 176)),
+                ),
                 child: const Text(
                   'Áp dụng quy định kiểm tra số tiền thu',
+                  style: TextStyle(fontSize: 18.0),
                 ),
               ),
             ),
