@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Thêm dòng này
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelfify/features/settings/setting_provide.dart'; // Thêm dòng này
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -22,9 +23,12 @@ class SettingsScreen extends ConsumerWidget {
     void readSharedPreferences() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       soLuongNhapController.text = prefs.getString("soLuongNhapToiThieu") ?? '';
-      soLuongTonKhoController.text = prefs.getString("soLuongTonKhoToiDa") ?? '';
-      soLuongTonToiThieuController.text = prefs.getString("soLuongTonToiThieuSauBan") ?? '';
-      tiLeTinhDonGiaController.text = prefs.getString("tiLeTinhDonGiaBan") ?? '';
+      soLuongTonKhoController.text =
+          prefs.getString("soLuongTonKhoToiDa") ?? '';
+      soLuongTonToiThieuController.text =
+          prefs.getString("soLuongTonToiThieuSauBan") ?? '';
+      tiLeTinhDonGiaController.text =
+          prefs.getString("tiLeTinhDonGiaBan") ?? '';
       soTienNoController.text = prefs.getString("soTienNoToiDa") ?? '';
     }
 
@@ -83,7 +87,20 @@ class SettingsScreen extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (ref.watch(settingCheckBoxStatedProvider)) {
+                    ref.read(settingCheckBoxStatedProvider.notifier).state =
+                        false;
+                  } else {
+                    ref.read(settingCheckBoxStatedProvider.notifier).state =
+                        true;
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: ref.read(settingCheckBoxStatedProvider)
+                      ? MaterialStateProperty.all(Colors.green)
+                      : MaterialStateProperty.all(Colors.red),
+                ),
                 child: const Text(
                   'Áp dụng quy định kiểm tra số tiền thu',
                 ),
