@@ -116,8 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Lập hoá đơn bán sách", Icons.shopping_cart),
                   onTap: () => context.go("/createInvoice"),
                 ),
-                _buildFeatureItem(
+                InkWell(
+                  child: _buildFeatureItem(
                     "Lập phiếu thu tiền", Icons.pause_presentation),
+                  onTap: () => context.go("/createPurchaseReceipt"),
+                ),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
               ],
             ),
