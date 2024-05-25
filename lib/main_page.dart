@@ -45,7 +45,23 @@ class _HomePageState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                Flexible(
+                  flex: 4,
+                  child: Container(),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    onPressed: () {
+                      context.go("/searchBook");
+                    },
+                    icon: const Icon(
+                      size: 40,
+                      Icons.search,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 20),
@@ -68,8 +84,18 @@ class _HomePageState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10),
               children: [
                 // Sửa lỗi ở đây
-                _buildCategoryItem("Danh sách phát", Icons.shelves),
-                _buildCategoryItem("Danh sách khách hàng", Icons.people),
+
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách Sách", Icons.shelves),
+                  onTap: () => context.go("/bookList"),
+                ),
+
+                InkWell(
+                  child: _buildCategoryItem(
+                      context, "Danh sách khách hàng", Icons.people),
+                  onTap: () => context.go("/listCustomer"),
+                ),
               ],
             ),
             const SizedBox(height: 20),
@@ -93,8 +119,15 @@ class _HomePageState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10),
               children: [
                 // Sửa lỗi ở đây
-                _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
-                _buildFeatureItem("Lập hoá đơn bán sách", Icons.car_rental),
+                InkWell(
+                  child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
+                  onTap: () => context.go("/createPurchaseReceipt"),
+                ),
+                InkWell(
+                  child: _buildFeatureItem(
+                      "Lập hoá đơn bán sách", Icons.shopping_cart),
+                  onTap: () => context.go("/createInvoice"),
+                ),
                 _buildFeatureItem(
                     "Lập phiếu thu tiền", Icons.pause_presentation),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
