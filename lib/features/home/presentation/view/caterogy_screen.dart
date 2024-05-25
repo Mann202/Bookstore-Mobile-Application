@@ -71,7 +71,7 @@ class _CaterogyScreenState extends State<CaterogyScreen>{
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               padding: const EdgeInsets.all(10),
-              children: [ // Sửa lỗi ở đây
+              children: [ 
                 _buildCategoryItem("Danh sách sách", Icons.shelves),
                 _buildCategoryItem("Danh sách khách hàng", Icons.people),
               ],
@@ -85,7 +85,7 @@ class _CaterogyScreenState extends State<CaterogyScreen>{
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               padding: const EdgeInsets.all(10), 
-              children: [ // Sửa lỗi ở đây
+              children: [
                 _buildFeatureItem("Phiếu nhập sách", Icons.book),
                 _buildFeatureItem("Danh sách khách hàng", Icons.people),
                 _buildFeatureItem("Danh sách phiếu nhập", Icons.store),
@@ -99,7 +99,6 @@ class _CaterogyScreenState extends State<CaterogyScreen>{
     );
   }
 
-  // Hàm xây dựng item cho danh mục
   Widget _buildCategoryItem(String title, IconData icon) {
     return Container(
       decoration: BoxDecoration(

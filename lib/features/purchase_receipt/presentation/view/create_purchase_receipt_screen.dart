@@ -7,13 +7,16 @@ import 'package:shelfify/core/router/app_router.dart';
 import 'package:shelfify/features/book/presentation/view/select_book_bottom_sheet.dart';
 import 'package:shelfify/features/book/presentation/view/select_customer_bottom_sheet.screen.dart';
 import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
+import 'package:shelfify/features/purchase_receipt/presentation/providers/purchase_receipt_provider.dart';
 
 class CreatePurchaseReceiptScreen extends ConsumerWidget {
-  const CreatePurchaseReceiptScreen({super.key});
+  CreatePurchaseReceiptScreen({super.key});
+  final TextEditingController tienThuController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCustomer = ref.watch(selectedCustomerStatedProvider);
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,6 +29,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             color: AppColors.primary,
           ),
           onPressed: () {
+
             context.pop();
           },
         ),
@@ -56,8 +60,8 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        buildInfoColumn('Mã phiếu thu', 'PT0001'),
-                        buildInfoColumn('Ngày thu', "25-05-2024", true),
+                        buildInfoColumn('Mã phiếu thu', 'PT0010'),
+                        buildInfoColumn('Ngày thu', "25-05-2024"),
                       ],
                     ),
                   ),
@@ -115,14 +119,15 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
             buildInfoText('Email', selectedCustomer.email),
             buildColoredInfoText('Công nợ cũ', selectedCustomer.outstandingAmount.toString(), Colors.red),
             buildInfoText("Số tiền thu", ""),
-            const TextField(
+             TextField(
+              controller: tienThuController,
               keyboardType: TextInputType.number,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 16.0,
                 fontWeight: FontWeight.w600,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey, width: 1.0),
@@ -146,7 +151,8 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.go("/createReceiptScreen");
+                    ref.read(soTienThuStatedProvider.notifier).state = tienThuController.text;
+                    context.go("/printReceiptScreen");
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -170,8 +176,7 @@ class CreatePurchaseReceiptScreen extends ConsumerWidget {
     );
   }
 
-  Widget buildInfoColumn(String label, String value,
-      [bool isEditable = false]) {
+  Widget buildInfoColumn(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
