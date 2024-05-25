@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Sửa lỗi ở đây
                 InkWell(
                   child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
-                  onTap: () => context.go("/createPurchaseReceipt"),
+                  onTap: () => context.go("/phieuNhapSach"),
                 ),
                 InkWell(
                   child: _buildFeatureItem(
