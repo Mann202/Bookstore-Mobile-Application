@@ -57,7 +57,7 @@ GoRouter goRouter(GoRouterRef ref) {
       ),
       GoRoute(
         path: "/category",
-        builder: (context, state) => CaterogyScreen(),
+        builder: (context, state) => const CategoryScreen(),
         routes: const [],
       ),
       GoRoute(

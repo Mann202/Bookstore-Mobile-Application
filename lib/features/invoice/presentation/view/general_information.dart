@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/core/models/models.dart';
+import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
 import 'package:shelfify/features/book/presentation/view/select_book_bottom_sheet.dart';
 import 'package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart';
 
-final selectedDetailsProvider = StateProvider.autoDispose<List<InvoiceDetail>>((ref) => []);
+final selectedDetailsProvider =
+    StateProvider<List<InvoiceDetail>>((ref) => []);
 
 class GeneralInformation extends ConsumerWidget {
   const GeneralInformation({super.key});
@@ -211,7 +213,36 @@ class GeneralInformation extends ConsumerWidget {
                   TextField(
                     style: AppTextStyles.s2,
                     keyboardType: TextInputType.number,
-                    onSubmitted: (value) {
+                    onSubmitted: (value) async {
+                      final soLuong = await ref
+                          .watch(localStoreProvider)
+                          .getString("soLuongTonToiThieuSauBan");
+
+                      if (int.parse(value) - book.quantityInStock <
+                          int.parse(soLuong!)) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Cảnh báo số lượng tồn kho"),
+                              content: const Text(
+                                  "Số lượng sản phẩm sau khi bán sẽ dưới mức tồn kho tối thiểu."),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pop(); // Close the dialog
+                                  },
+                                  child: const Text("Đóng"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        // ... (proceed with the intended action since stock is sufficient)
+                      }
+
                       ref.read(selectedDetailsProvider.notifier).state = ref
                           .read(selectedDetailsProvider.notifier)
                           .state
