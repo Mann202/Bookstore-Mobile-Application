@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
+import 'package:shelfify/core/constants/styles/app_sizes.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
@@ -116,6 +118,13 @@ class SelectBookBottomSheet extends ConsumerWidget {
                           ),
                           trailing: Column(
                             children: [
+                              Text(
+                                '${NumberFormat('#.###').format(book.sellingPrice)} VND',
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: AppTextStyles.fontFamily),
+                              ),
                               Text(
                                 'Tồn kho: ${book.quantityInStock}',
                                 style: const TextStyle(

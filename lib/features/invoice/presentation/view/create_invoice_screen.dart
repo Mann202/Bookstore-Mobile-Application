@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
+import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/features/invoice/presentation/providers/invoice_provider.dart';
 import 'package:shelfify/features/invoice/presentation/view/customer_information.dart';
 import 'package:shelfify/features/invoice/presentation/view/general_information.dart';
@@ -28,6 +29,8 @@ class CreateInvoiceScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final details = ref.watch(selectedDetailsProvider);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -37,9 +40,10 @@ class CreateInvoiceScreen extends ConsumerWidget {
           title: const Text(
             'Tạo hoá đơn bán sách',
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Color(0xFF4758A8)),
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Color(0xFF4758A8),
+            ),
           ),
           leading: IconButton(
             icon: const Icon(
@@ -105,9 +109,9 @@ class CreateInvoiceScreen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Tổng tiền: 500.000đ',
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                Text(
+                  'Tổng tiền: ${details.map((detail) => detail.totalPrice).reduce((a, b) => a + b)}',
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
                 ElevatedButton(
                   onPressed: () {},
