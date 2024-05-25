@@ -1,5 +1,4 @@
 import 'package:shelfify/core/models/models.dart';
-import 'package:shelfify/features/book/data/datasource/books_database.dart';
 
 extension InvoiceExtension on Invoice {
   Map<String, dynamic> toMap() {
@@ -71,6 +70,18 @@ extension BookExtension on Book {
       'DonGiaNhap': purchasePrice,
     };
   }
+
+  String getAuthor() {
+    return author.authorName;
+  }
+
+  String getTitle() {
+    return title.bookTitle;
+  }
+
+  String getCategory() {
+    return category.categoryName;
+  }
 }
 
 extension BookTitleExtension on BookTitle {
@@ -98,25 +109,14 @@ extension CategoryExtension on Category {
 }
 
 extension InventoryReportExtension on InventoryReport {
-  static InventoryReport toModel(Map<String, dynamic> map) {
-    return InventoryReport(
-      month: map['Thang'] as int,
-      year: map['Nam'] as int,
-      id: map['MaSach'] as int,
-      startingQuantity: map['SoLuongDauKy'] as int,
-      quantityChange: map['SoLuongPhatSinh'] as int,
-      endingQuantity: map['SoLuongCuoiKy'] as int,
-    );
-  }
-
-  static Map<String, dynamic> toMap(final InventoryReport model) {
+  Map<String, dynamic> toMap() {
     return {
-      'Thang': model.month,
-      'Nam': model.year,
-      'MaSach': model.id,
-      'SoLuongDauKy': model.startingQuantity,
-      'SoLuongPhatSinh': model.quantityChange,
-      'SoLuongCuoiKy': model.endingQuantity,
+      'Thang': month,
+      'Nam': year,
+      'MaSach': id,
+      'SoLuongDauKy': startingQuantity,
+      'SoLuongPhatSinh': quantityChange,
+      'SoLuongCuoiKy': endingQuantity,
     };
   }
 }

@@ -58,25 +58,31 @@ class _HoaDonBanSachScreenState extends State<HoaDonBanSachScreen> {
           bottom: const TabBar(
             tabs: [
               Tab(
+                  child: SizedBox(
+                width: double.infinity,
                 child: Text(
                   "Thông tin chung",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTextStyles.fontFamily,
                     fontSize: 15,
                     color: Colors.black,
                   ),
                 ),
-              ),
+              )),
               Tab(
+                  child: SizedBox(
+                width: double.infinity,
                 child: Text(
                   "Khách hàng",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTextStyles.fontFamily,
                     fontSize: 15,
                     color: Colors.black,
                   ),
                 ),
-              ),
+              )),
             ],
             labelColor: Colors.white,
             unselectedLabelColor: Colors.black,

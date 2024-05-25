@@ -7,10 +7,10 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +64,14 @@ class _HomePageState extends State<HomeScreen> {
                 )
               ],
             ),
+            InkWell(
+              child: _buildCategoryItem("Danh sách Sách", Icons.shelves),
+              onTap: () => context.go("/bookList"),
+            ),
+            InkWell(
+              child: _buildCategoryItem("Danh sách khách hàng", Icons.people),
+              onTap: () => context.go("/listCustomer"),
+            ),
             const SizedBox(height: 20),
             Container(
               alignment: Alignment.centerLeft,
@@ -84,49 +92,14 @@ class _HomePageState extends State<HomeScreen> {
               padding: const EdgeInsets.all(10),
               children: [
                 // Sửa lỗi ở đây
-
-                InkWell(
-                  child: _buildCategoryItem(
-                      context, "Danh sách Sách", Icons.shelves),
-                  onTap: () => context.go("/bookList"),
-                ),
-
-                InkWell(
-                  child: _buildCategoryItem(
-                      context, "Danh sách khách hàng", Icons.people),
-                  onTap: () => context.go("/listCustomer"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: const Text(
-                "DANH SÁCH PHẦN MỀM",
-                style: TextStyle(
-                    color: Color(0xFF4758A8),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.0,
-                    fontFamily: AppTextStyles.fontFamily),
-              ),
-            ),
-            const SizedBox(height: 10),
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              padding: const EdgeInsets.all(10),
-              children: [
-                // Sửa lỗi ở đây
                 InkWell(
                   child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
                   onTap: () => context.go("/createPurchaseReceipt"),
                 ),
                 InkWell(
                   child: _buildFeatureItem(
-                      "Lập hoá đơn bán sách", Icons.shopping_cart),
-                  onTap: () => context.go("/createInvoice"),
+                      "Lập hoá đơn bán sách", Icons.car_rental),
+                  onTap: () => context.go("/addNewBookInvoice"),
                 ),
                 _buildFeatureItem(
                     "Lập phiếu thu tiền", Icons.pause_presentation),
