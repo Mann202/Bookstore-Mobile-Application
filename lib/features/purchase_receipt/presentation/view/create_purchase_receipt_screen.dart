@@ -1,224 +1,269 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shelfify/app.dart';
-import 'package:shelfify/core/constants/styles/app_colors.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shelfify/core/constants/styles/app_text_styles.dart';
+import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
 
-class CreatePurchaseReceiptScreen extends StatelessWidget {
-  const CreatePurchaseReceiptScreen({super.key});
+class CreatePurchaseReceiptScreen extends ConsumerWidget {
+  final List<Map<String, dynamic>> sanPham = [
+    {
+      'TenDauSach': 'Nhà Giả Kim',
+      'TenTheLoai': 'Tiểu thuyết',
+      'SoLuong': 3,
+      'DonGiaBan': 120000,
+    },
+    {
+      'TenDauSach': 'Sapiens: Lịch sử loài người',
+      'TenTheLoai': 'Lịch sử',
+      'SoLuong': 2,
+      'DonGiaBan': 180000,
+    },
+    {
+      'TenDauSach': 'Đắc Nhân Tâm',
+      'TenTheLoai': 'Kỹ năng',
+      'SoLuong': 1,
+      'DonGiaBan': 80000,
+    },
+    {
+      'TenDauSach': 'Harry Potter và chiếc cốc lửa',
+      'TenTheLoai': 'Giả tưởng',
+      'SoLuong': 4,
+      'DonGiaBan': 95000,
+    },
+  ];
+
+  final List<Map<String, dynamic>> invoice = [
+    {
+      'MaHoaDon': 'HD001',
+      'NgayLap': '25/05/2024',
+    },
+  ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Tạo danh sách các controller cho từng ô trong bảng
+    final List<TextEditingController> soluongControllers = [];
+    final List<TextEditingController> dongGiaControllers = [];
+
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.primary,
-          ),
-          onPressed: () {
-            context.pop();
-          },
-        ),
         title: const Text(
-          'Tạo phiếu thu tiền',
-          style: TextStyle(
-            color: AppColors.primary,
-            fontSize: 22.0,
-            fontWeight: FontWeight.w700,
-          ),
+          "Tạo phiếu nhập sách",
+          style: TextStyle(color: Color(0xFF5265C2), fontSize: 25, fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.lightBlue.shade100),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        buildInfoColumn('Mã phiếu thu', 'PT0001'),
-                        buildInfoColumn('Ngày thu', '15-05-2023', true),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Thông tin khách hàng',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const TextField(
-              keyboardType: TextInputType.text,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                fillColor: Color.fromARGB(255, 255, 255, 255),
-                hintText: 'TenKhachHang',
-                hintStyle: TextStyle(
-                  color: Color.fromARGB(255, 172, 172, 172),
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-                suffixIcon: Icon(Icons.search, size: 30, color: Colors.grey),
-              ),
-            ),
-            const SizedBox(height: 10),
-            buildInfoText('Địa chỉ', 'DiaChi'),
-            buildInfoText('Điện thoại', 'SoDienThoai'),
-            buildInfoText('Email', 'Email'),
-            buildColoredInfoText('Công nợ cũ', 'SoTienNo VND', Colors.red),
-            buildInfoText("Số tiền thu", ""),
-            const TextField(
-              keyboardType: TextInputType.number,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                fillColor: Color.fromARGB(255, 255, 255, 255),
-                hintText: 'Nhập số tiền thu',
-                hintStyle: TextStyle(
-                  color: Color.fromARGB(255, 172, 172, 172),
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
             Container(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Mã hóa đơn",
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        invoice[0]['MaHoaDon'],
+                        style: const TextStyle(color: Colors.black, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Ngày lập",
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        invoice[0]['NgayLap'],
+                        style: const TextStyle(color: Colors.black, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              "Danh sách sản phẩm",
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: AppTextStyles.fontFamily,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            DataTable(
+              columnSpacing: 8,
+              dataRowHeight: 100,
+              columns: [
+                DataColumn(
+                  label: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE2E5F6),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    fixedSize: const Size(180, 45),
-                    backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
-                  ),
-                  child: const Text(
-                    'Lưu',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
+                    child: const Text(
+                      'Sách',
+                      style: TextStyle(color: Color(0xFF5265C2), fontSize: 20),
                     ),
                   ),
-                )),
-          ],
-        ),
-      ),
-    );
-  }
+                ),
+                DataColumn(
+                  label: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE2E5F6),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: const Text(
+                      'SL',
+                      style: TextStyle(color: Color(0xFF5265C2), fontSize: 17),
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Container(
+                    padding: const EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE2E5F6),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: const Text(
+                      'ĐG Bán',
+                      style: TextStyle(color: Color(0xFF5265C2), fontSize: 17),
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE2E5F6),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: const Text(
+                      'Thành tiền',
+                      style: TextStyle(color: Color(0xFF5265C2), fontSize: 17),
+                    ),
+                  ),
+                ),
+              ],
+              rows: List<DataRow>.generate(sanPham.length, (index) {
+                final sp = sanPham[index];
+                final soluongController = soluongControllers[index];
+                final dongGiaController = dongGiaControllers[index];
 
-  Widget buildInfoColumn(String label, String value,
-      [bool isEditable = false]) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(fontSize: 16, color: Colors.black),
-        ),
-        Row(
-          children: [
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+                return DataRow(
+                  cells: [
+                    DataCell(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            sp['TenDauSach'].length > 15
+                                ? '${sp['TenDauSach'].substring(0, 15)}...'
+                                : sp['TenDauSach'],
+                            style: const TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          Text(
+                            sp['TenTheLoai'],
+                            style: const TextStyle(color: Colors.black, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    ),
+                    DataCell(
+                      TextField(
+                        controller: soluongController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'SL',
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      TextField(
+                        controller: dongGiaController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'DG',
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        ((int.tryParse(soluongController.text) ?? 0) *
+                                (int.tryParse(dongGiaController.text) ?? 0))
+                            .toString(),
+                        style: const TextStyle(color: Colors.black, fontSize: 18),
+                      ),
+                    ),
+                  ],
+                );
+              }),
             ),
-            if (isEditable)
-              const Icon(
-                Icons.edit,
-                size: 16,
-                color: Colors.blue,
-              ),
           ],
         ),
-      ],
-    );
-  }
-
-  Widget buildInfoText(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(fontSize: 16, color: Colors.black),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(16),
+        child: Container(
+          color: const Color(0xFFE5ECFF),
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Tổng tiền: ${_tinhTongTien(sanPham, soluongControllers, dongGiaControllers)}',
+                style: const TextStyle(color: Colors.black, fontSize: 20),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Thực hiện hành động lưu
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1F46A6),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                ),
+                child: const Text(
+                  'Lưu',
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800),
+                ),
+              ),
+            ],
           ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 16, color: Colors.grey),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget buildColoredInfoText(String label, String value, Color color) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          Text(
-            value,
-            style: TextStyle(fontSize: 16, color: color),
-          ),
-        ],
-      ),
-    );
+  double _tinhTongTien(List<Map<String, dynamic>> sanPham, List<TextEditingController> soluongControllers, List<TextEditingController> dongGiaControllers) {
+    double tong = 0;
+    for (var i = 0; i < sanPham.length; i++) {
+      final soLuong = int.tryParse(soluongControllers[i].text) ?? sanPham[i]['SoLuong'];
+      final donGia = int.tryParse(dongGiaControllers[i].text) ?? sanPham[i]['DonGiaBan'];
+      tong += soLuong * donGia;
+    }
+    return tong;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shelfify/features/book/presentation/view/select_customer_bottom_sheet.screen.dart';
 import 'package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart';
 
 class CustomerInformation extends ConsumerWidget {
@@ -71,6 +72,14 @@ class CustomerInformation extends ConsumerWidget {
             ),
             TextField(
               style: const TextStyle(fontSize: 20, color: Colors.black),
+              onTap: () {
+                showModalBottomSheet(
+                  constraints: const BoxConstraints.expand(),
+                  context: context,
+                  builder: (context) {
+                    return const SelectCustomerBottomSheet();
+                  });
+              },
               decoration: InputDecoration(
                 hintText: 'TenKhachHang',
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 20),

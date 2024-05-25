@@ -24,7 +24,7 @@ GoRouter goRouter(GoRouterRef ref) {
           ),
           GoRoute(
               path: "createPurchaseReceipt",
-              builder: (context, state) => const CreatePurchaseReceiptScreen()),
+              builder: (context, state) => CreatePurchaseReceiptScreen()),
           GoRoute(
             path: "searchCustomer",
             builder: (context, state) => const SearchCustomerScreen(),
