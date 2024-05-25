@@ -4,6 +4,8 @@ class AppColors {
   static const Color transparent = Color(0x00000000);
 
   static const Color black = Color(0xff000000);
+  static Color black20 = const Color(0x00000000).withOpacity(0.2);
+
   static Color black50 = const Color(0xff000000).withOpacity(0.5);
 
   static const Color white = Color(0xffffffff);
