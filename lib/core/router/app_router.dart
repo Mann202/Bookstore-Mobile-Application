@@ -42,7 +42,25 @@ GoRouter goRouter(GoRouterRef ref) {
             builder: (context, state) => const CreateInvoiceScreen(),
           )
         ],
-      )
+      ),
+      GoRoute(
+        path: "/category",
+        builder: (context, state) => const HomeScreen(),
+        routes: const [
+        ],
+      ),
+      GoRoute(
+        path: "/account",
+        builder: (context, state) => const HomeScreen(),
+        routes: const [
+        ],
+      ),
+      GoRoute(
+        path: "/settings",
+        builder: (context, state) => const HomeScreen(),
+        routes: const [
+        ],
+      ),
     ],
     errorBuilder: (context, state) => const NotFoundScreen(),
   );
