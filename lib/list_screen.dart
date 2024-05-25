@@ -50,8 +50,6 @@ class _ListScreenState extends State<ListScreen>{
                 const SizedBox(width: 10),
               ],
             ),
-
-            const SizedBox(height: 20),
             
             Container(
               alignment: Alignment.centerLeft,
