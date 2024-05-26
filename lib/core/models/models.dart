@@ -63,40 +63,42 @@ class DebtReport with _$DebtReport {
 @freezed
 class Invoice with _$Invoice {
   const factory Invoice({
-    required int invoiceId,
-    required int customerId,
+    int? invoiceId,
+    required Customer customer,
     required DateTime invoiceDate,
     required double totalAmount,
     required double paymentAmount,
     required double remainingAmount,
+    required List<InvoiceDetail> invoiceDetails,
   }) = _Invoice;
 
   factory Invoice.fromMap(Map<String, dynamic> map) => Invoice(
         invoiceId: map['MaHoaDon'] as int,
-        customerId: map['MaKhachHang'] as int,
         invoiceDate: map['NgayHoaDon'],
         totalAmount: map['TongTien'] as double,
         paymentAmount: map['SoTienThanhToan'] as double,
         remainingAmount: map['SoTienConLai'] as double,
+        customer: Customer.fromMap(map['KhachHang']),
+        invoiceDetails: (map['ChiTietHoaDon'] as List)
+            .map((e) => InvoiceDetail.fromMap(e as Map<String, dynamic>))
+            .toList(),
       );
 }
 
 @freezed
-class InvoiceInfo with _$InvoiceInfo {
-  const factory InvoiceInfo({
-    required int invoiceId,
-    required int id,
+class InvoiceDetail with _$InvoiceDetail {
+  const factory InvoiceDetail({
     required int quantity,
+    required Book book,
     required double unitPrice,
     required double totalPrice,
-  }) = _InvoiceInfo;
+  }) = _InvoiceDetail;
 
-  factory InvoiceInfo.fromMap(Map<String, dynamic> map) => InvoiceInfo(
-        invoiceId: map['MaHoaDon'] as int,
-        id: map['MaSach'] as int,
+  factory InvoiceDetail.fromMap(Map<String, dynamic> map) => InvoiceDetail(
         quantity: map['SoLuong'] as int,
         unitPrice: map['DonGia'] as double,
         totalPrice: map['TongTien'] as double,
+        book: Book.fromMap(map['Sach']),
       );
 }
 

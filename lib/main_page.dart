@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shelfify/bottom_nav.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 
@@ -94,21 +95,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Sửa lỗi ở đây
                 InkWell(
                   child: _buildFeatureItem("Lập phiếu nhập sách", Icons.store),
-                  onTap: () => context.go("/createPurchaseReceipt"),
+                  onTap: () => context.go("/phieuNhapSach"),
                 ),
                 InkWell(
                   child: _buildFeatureItem(
-                      "Lập hoá đơn bán sách", Icons.car_rental),
-                  onTap: () => context.go("/addNewBookInvoice"),
+                      "Lập hoá đơn bán sách", Icons.shopping_cart),
+                  onTap: () => context.go("/createInvoice"),
                 ),
-                _buildFeatureItem(
+                InkWell(
+                  child: _buildFeatureItem(
                     "Lập phiếu thu tiền", Icons.pause_presentation),
+                  onTap: () => context.go("/createPurchaseReceipt"),
+                ),
                 _buildFeatureItem("Lập báo cáo tháng", Icons.analytics),
               ],
             ),
           ],
         ),
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(currentIndex: 0,),
     );
   }
 

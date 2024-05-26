@@ -60,4 +60,20 @@ class BookListStateNotifier extends StateNotifier<State<List<Book>>> {
       state = State.error(e);
     }
   }
+
+  searchBook(String query) async {
+    try {
+      state = const State.loading();
+      final books = await getAllBooksUseCase.execute();
+      final filteredBooks = books.where((book) {
+        return book.title
+            .toString()
+            .toLowerCase()
+            .contains(query.toLowerCase());
+      }).toList();
+      state = State.success(filteredBooks);
+    } on Exception catch (e) {
+      state = State.error(e);
+    }
+  }
 }

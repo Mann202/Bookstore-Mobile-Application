@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
+import 'package:shelfify/features/book/presentation/view/selected_customer_provider.dart';
+import 'package:shelfify/features/purchase_receipt/presentation/providers/purchase_receipt_provider.dart';
 
-class PrintReceiptScreen extends StatelessWidget {
+
+
+class PrintReceiptScreen extends ConsumerWidget {
   const PrintReceiptScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedCustomer = ref.watch(selectedCustomerStatedProvider);
+    final selectedCustomerTienThu = ref.watch(soTienThuStatedProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -16,10 +25,12 @@ class PrintReceiptScreen extends StatelessWidget {
             Icons.arrow_back,
             color: AppColors.primary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            context.pop();
+          },
         ),
         title: const Text(
-          'In phiếu thu tiền',
+          'Xem phiếu thu tiền',
           style: TextStyle(
             color: AppColors.primary,
             fontSize: 22.0,
@@ -45,8 +56,8 @@ class PrintReceiptScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        buildInfoColumn('Mã phiếu thu', 'PT0001'),
-                        buildInfoColumn('Ngày thu', '15-05-2023', true),
+                        buildInfoColumn('Mã phiếu thu', 'PT0010'),
+                        buildInfoColumn('Ngày thu', '25-05-2023'),
                       ],
                     ),
                   ),
@@ -54,45 +65,23 @@ class PrintReceiptScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            buildInfoRow('Họ tên khách hàng', 'TenKhachHang', isBold: true),
-            buildInfoRow('Địa chỉ', 'DiaChi', isOptional: true),
-            buildInfoRow('Điện thoại', 'SoDienThoai', isOptional: true),
-            buildInfoRow('Email', 'Email', isOptional: true),
-            buildInfoRow('Công nợ cũ', 'SoTienNo VND',
+            buildInfoRow('Họ tên khách hàng', selectedCustomer.customerName, isBold: true),
+            buildInfoRow('Địa chỉ', selectedCustomer.address, isOptional: true),
+            buildInfoRow('Điện thoại', selectedCustomer.phoneNumber, isOptional: true),
+            buildInfoRow('Email', selectedCustomer.email, isOptional: true),
+            buildInfoRow('Công nợ cũ', selectedCustomer.outstandingAmount.toString(),
                 color: Colors.red, isBold: true),
-            buildInfoRow('Số tiền thu', 'SoTienThu VND',
+            buildInfoRow('Số tiền thu', selectedCustomerTienThu,
                 color: Colors.green, isBold: true),
-            buildInfoRow('Còn lại', 'ConLai VND', isBold: true),
+            buildInfoRow('Còn lại', (selectedCustomer.outstandingAmount - double.parse(selectedCustomerTienThu)).toString() , isBold: true),
             const SizedBox(height: 20),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  fixedSize: const Size(180, 50),
-                  backgroundColor: const Color.fromRGBO(31, 70, 166, 1),
-                ),
-                child: const Text(
-                  'In',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildInfoColumn(String label, String value,
-      [bool isEditable = false]) {
+  Widget buildInfoColumn(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -110,12 +99,6 @@ class PrintReceiptScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            if (isEditable)
-              const Icon(
-                Icons.edit,
-                size: 16,
-                color: Colors.blue,
-              ),
           ],
         ),
       ],
