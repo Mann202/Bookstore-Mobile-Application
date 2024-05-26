@@ -1,16 +1,33 @@
-# Bookstore-Mobile-Application
+# Bookstore Mobile Application
 
-A new Flutter project.
+## 1. Introduction
 
-## Getting Started
+Welcome to our Book Application Store, a comprehensive platform designed to cater to book lovers and avid readers alike. Developed using Flutter, our app provides a seamless and engaging experience across both Android and iOS devices, ensuring that users can easily discover, purchase, and read their favorite books anytime, anywhere.
 
-This project is a starting point for a Flutter application.
+Our application features a vast library of books across various genres, including fiction, non-fiction, science, technology, self-help, and more. Key features of the app include:
 
-A few resources to get you started if this is your first Flutter project:
+User-Friendly Interface: A clean and intuitive design that makes navigation simple and enjoyable.
+Search and Filter Options: Advanced search functionality to help users find books by title, author, genre, or keywords.
+Offline Access: Download books for offline reading, ensuring that users can enjoy their books even without an internet connection.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Our goal is to create a one-stop-shop for all book-related needs, making it easier for readers to access a wide range of books while providing authors and publishers a platform to reach a broader audience. The use of Flutter allows us to maintain a high level of performance and consistency across devices, ensuring a smooth and responsive user experience.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project will be developed in phases, starting with market research and requirement analysis, followed by design, development, testing, and deployment. Through this methodical approach, we aim to deliver a top-notch book application store that meets the needs of both readers and authors.
+
+## 2. Members of Group 
+
+|    ID    |       Name       |         Email          |
+|:--------:|:----------------:|:----------------------:|
+| 21520430 |  Le Xuan Quynh   | 21520430@gm.uit.edu.vn |
+| 21520756 | Nguyen Dai Duong | 21520756@gm.uit.edu.vn |
+| 21521115 |  Truong Gia Man | 21521115@gm.uit.edu.vn |
+| 21522391 | Nguyen Binh Nguyen  | 21522391@gm.uit.edu.vn |
+| 21522794 | Nguyen The Vinh  | 21522794@gm.uit.edu.vn |
+
+## 3. Technology and Tools Used
+
+- Dart
+- Flutter
+- Visual Code
+- SQLite
+
