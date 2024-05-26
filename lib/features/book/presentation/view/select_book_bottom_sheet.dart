@@ -3,16 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:shelfify/core/constants/styles/app_colors.dart';
-import 'package:shelfify/core/constants/styles/app_sizes.dart';
 import 'package:shelfify/core/constants/styles/app_text_styles.dart';
 import 'package:shelfify/core/models/models.dart';
 import 'package:shelfify/core/models/models.extension.dart';
+import 'package:shelfify/core/services/local_storage/local_store.provider.dart';
 import 'package:shelfify/features/book/presentation/providers/book_list_provider.dart';
-import 'package:shelfify/features/book/presentation/providers/selected_books_provider.dart';
 import 'package:shelfify/features/invoice/presentation/view/general_information.dart';
 
-final selectedBookStateProvider =
-    StateProvider<List<Book>>((ref) => []);
+final selectedBookStateProvider = StateProvider<List<Book>>((ref) => []);
 
 class SelectBookBottomSheet extends ConsumerWidget {
   const SelectBookBottomSheet({super.key});
@@ -62,9 +60,32 @@ class SelectBookBottomSheet extends ConsumerWidget {
                   itemCount: books.length,
                   itemBuilder: (context, index) {
                     final book = books[index];
-
                     return InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        final tonKhoToiDa = await ref
+                            .watch(localStoreProvider)
+                            .getString("soLuongTonKhoToiDa");
+                        if (book.quantityInStock >= int.parse(tonKhoToiDa!)) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Cảnh báo số lượng nhập"),
+                                  content: const Text(
+                                      "Số lượng sản phẩm nhập không dưới số lượng tối thiểu đã cài đặt."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Đóng"),
+                                    ),
+                                  ],
+                                );
+                              });
+                          return;
+                        }
+
                         if (selectedBook.contains(book)) {
                           selectedBook =
                               selectedBook.where((e) => e != book).toList();

@@ -18,7 +18,6 @@ import "package:shelfify/features/customer/presentation/view/search_customer_scr
 import "package:shelfify/features/home/presentation/view/caterogy_screen.dart";
 import "package:shelfify/features/home/presentation/view/home_screen.dart";
 import "package:shelfify/features/invoice/presentation/view/create_invoice_screen.dart";
-import "package:shelfify/features/invoice/presentation/view/create_recipt.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_phieu_nhap_sach.dart";
 import "package:shelfify/features/purchase_receipt/presentation/view/create_purchase_receipt_screen.dart";
 import "package:shelfify/features/settings/acconut_screen.screen.dart";
