@@ -19,10 +19,9 @@ This project will be developed in phases, starting with market research and requ
 |    ID    |       Name       |         Email          |
 |:--------:|:----------------:|:----------------------:|
 | 21520430 |  Le Xuan Quynh   | 21520430@gm.uit.edu.vn |
-| 21520756 | Nguyen Dai Duong | 21520756@gm.uit.edu.vn |
 | 21521115 |  Truong Gia Man | 21521115@gm.uit.edu.vn |
-| 21522391 | Nguyen Binh Nguyen  | 21522391@gm.uit.edu.vn |
-| 21522794 | Nguyen The Vinh  | 21522794@gm.uit.edu.vn |
+| 22520483 | Nguyen Tan Hoang  | 22520483@gm.uit.edu.vn |
+| 22520697 |  Le Anh Khoi     | 22520697@gm.uit.edu.vn |
 
 ## 3. Technology and Tools Used
 
